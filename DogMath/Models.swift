@@ -7,8 +7,8 @@ struct PlayerProfile: Identifiable, Hashable, Codable, Sendable {
     let symbol: String
 
     static let laura = PlayerProfile(id: "laura", name: "Laura", symbol: "sparkles")
-    static let isabella = PlayerProfile(id: "isabella", name: "Isabella", symbol: "heart.fill")
-    static let all: [PlayerProfile] = [.isabella, .laura]
+    static let izabella = PlayerProfile(id: "isabella", name: "Izabella", symbol: "heart.fill")
+    static let all: [PlayerProfile] = [.izabella, .laura]
 
     var tint: Color {
         id == "laura" ? Color(red: 0.60, green: 0.42, blue: 0.86) : Color(red: 0.95, green: 0.39, blue: 0.58)

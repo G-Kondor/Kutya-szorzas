@@ -1,10 +1,10 @@
 # Kutyaszorzás
 
-Kedves, offline iOS-matek-játék Laurának és Isabellának. A gyerekek ötös körökben gyakorolják a százas számkörön belüli szorzást és osztást, hibátlan körönként pedig új kutyust gyűjtenek.
+Kedves, offline iOS-matek-játék Laurának és Izabellának. A gyerekek ötös körökben gyakorolják a százas számkörön belüli szorzást és osztást, hibátlan körönként pedig új kutyust gyűjtenek.
 
 ## Játékszabály
 
-- A kezdőképernyőn Laura és Isabella külön profilja választható, bejelentkezés nélkül.
+- A kezdőképernyőn Laura és Izabella külön profilja választható, bejelentkezés nélkül.
 - Három játékmód van: szorzás, osztás és vegyes.
 - Minden kör 5 feleletválasztós feladatból áll.
 - Hibátlan kör után egy új kutyus jár a 40 darabos gyűjteményből.
