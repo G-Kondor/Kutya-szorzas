@@ -13,6 +13,12 @@ struct DogCollectionView: View {
         Set(store.progress(for: profile).collectedDogIDs)
     }
 
+    private var orderedDogIDs: [Int] {
+        let collected = store.progress(for: profile).collectedDogIDs
+        let locked = (0..<DogCatalog.count).filter { !owned.contains($0) }
+        return collected + locked
+    }
+
     var body: some View {
         ZStack {
             AppTheme.background.ignoresSafeArea()
@@ -25,7 +31,7 @@ struct DogCollectionView: View {
                         .padding(.top, 4)
 
                     LazyVGrid(columns: columns, spacing: 12) {
-                        ForEach(0..<DogCatalog.count, id: \.self) { dogID in
+                        ForEach(orderedDogIDs, id: \.self) { dogID in
                             dogCard(dogID)
                         }
                     }
