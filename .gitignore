@@ -5,3 +5,6 @@ build/
 xcuserdata/
 *.xccheckout
 *.moved-aside
+
+# A korábbi, véletlenül beágyazott klón Xcode által újragenerált metaadatai
+/Kutya-szorzas/
