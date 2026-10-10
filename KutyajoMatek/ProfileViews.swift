@@ -155,21 +155,21 @@ struct CreateProfileView: View {
 
             ScrollView {
                 VStack(spacing: 22) {
-                    Text(isFirstLaunch ? String(localized: "Hogy hívnak?") : String(localized: "Új játékos"))
+                    Text(isFirstLaunch ? L10n.text("Hogy hívnak?") : L10n.text("Új játékos"))
                         .font(.system(size: 30, weight: .heavy, design: .rounded))
                         .foregroundStyle(AppTheme.ink)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
                     Text(isFirstLaunch
-                         ? String(localized: "Írd be a keresztneved vagy beceneved, és már játszhatsz is. Nem kell e-mail.")
-                         : String(localized: "Adj meg egy nevet. A kutyusok és a haladás külön mentődnek."))
+                         ? L10n.text("Írd be a keresztneved vagy beceneved, és már játszhatsz is. Nem kell e-mail.")
+                         : L10n.text("Adj meg egy nevet. A kutyusok és a haladás külön mentődnek."))
                         .font(.system(.body, design: .rounded, weight: .medium))
                         .foregroundStyle(.secondary)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
                     avatarPicker
 
-                    TextField(String(localized: "Pl. Izabella"), text: $name)
+                    TextField(L10n.text("Pl. Izabella"), text: $name)
                         .textInputAutocapitalization(.words)
                         .font(.system(.title3, design: .rounded, weight: .semibold))
                         .padding(16)
@@ -179,7 +179,7 @@ struct CreateProfileView: View {
                         save()
                     } label: {
                         Label(
-                            isFirstLaunch ? String(localized: "Kezdhetjük!") : String(localized: "Profil létrehozása"),
+                            isFirstLaunch ? L10n.text("Kezdhetjük!") : L10n.text("Profil létrehozása"),
                             systemImage: "play.fill"
                         )
                             .font(.system(.headline, design: .rounded, weight: .bold))
@@ -229,7 +229,7 @@ struct CreateProfileView: View {
             }
 
             PhotosPicker(selection: $pickerItem, matching: .images) {
-                Text(previewImage == nil ? String(localized: "Kép választása") : String(localized: "Másik kép"))
+                Text(previewImage == nil ? L10n.text("Kép választása") : L10n.text("Másik kép"))
                     .font(.system(.subheadline, design: .rounded, weight: .bold))
                     .foregroundStyle(AppTheme.lavender)
             }

@@ -419,3 +419,42 @@ final class AppStoreTests: XCTestCase {
         XCTAssertEqual(reloaded.languagePreference, .system)
     }
 }
+
+@MainActor
+final class LocalizationTests: XCTestCase {
+    func testHungarianPreferenceUsesHungarianGameModeTitles() {
+        let suiteName = "LocalizationTests.hu.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let store = AppStore(defaults: defaults)
+        store.setLanguagePreference(.hungarian)
+
+        XCTAssertEqual(GameMode.multiplication.title, "Szorzás")
+        XCTAssertEqual(GameMode.division.title, "Osztás")
+        XCTAssertEqual(GameMode.mixed.title, "Vegyes")
+        XCTAssertEqual(L10n.spokenTimes(), "szorozva")
+        XCTAssertEqual(L10n.spokenDivided(), "osztva")
+        XCTAssertEqual(L10n.multiplicationTableTitle(4), "Szorzás 4-vel")
+        XCTAssertEqual(L10n.divisionTableTitle(6), "Osztás 6-vel")
+        XCTAssertEqual(L10n.text("Válassz játékot"), "Válassz játékot")
+    }
+
+    func testEnglishPreferenceUsesEnglishGameModeTitles() {
+        let suiteName = "LocalizationTests.en.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let store = AppStore(defaults: defaults)
+        store.setLanguagePreference(.english)
+
+        XCTAssertEqual(GameMode.multiplication.title, "Multiplication")
+        XCTAssertEqual(GameMode.division.title, "Division")
+        XCTAssertEqual(GameMode.mixed.title, "Mixed")
+        XCTAssertEqual(L10n.spokenTimes(), "times")
+        XCTAssertEqual(L10n.spokenDivided(), "divided by")
+        XCTAssertEqual(L10n.multiplicationTableTitle(4), "Multiply by 4")
+        XCTAssertEqual(L10n.divisionTableTitle(6), "Divide by 6")
+        XCTAssertEqual(L10n.text("Válassz játékot"), "Choose a game")
+    }
+}
