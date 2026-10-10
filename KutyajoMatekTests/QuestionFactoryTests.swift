@@ -304,4 +304,118 @@ final class AppStoreTests: XCTestCase {
         XCTAssertNil(second.unlockedLevel)
         XCTAssertEqual(store.learningPath(for: profile, operation: .division).unlockedLevel, LearningLevel.count)
     }
+
+    func testLegacyLauraAndIzabellaProfilesMigrateWithProgress() throws {
+        let suiteName = "AppStoreMigrate.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let lauraProgress = PlayerProgress(collectedDogIDs: [3, 7], totalCorrectAnswers: 10, completedRounds: 2)
+        let izabellaProgress = PlayerProgress(collectedDogIDs: [1], totalCorrectAnswers: 5, completedRounds: 1)
+        defaults.set(
+            try JSONEncoder().encode([
+                PlayerProfile.legacyLauraID: lauraProgress,
+                PlayerProfile.legacyIzabellaID: izabellaProgress
+            ]),
+            forKey: "kutyajoMatek.progress.v1"
+        )
+
+        let store = AppStore(defaults: defaults)
+        XCTAssertEqual(store.profiles.map(\.id).sorted(), [
+            PlayerProfile.legacyIzabellaID,
+            PlayerProfile.legacyLauraID
+        ].sorted())
+        XCTAssertEqual(store.progress(for: .laura).collectedDogIDs, [3, 7])
+        XCTAssertEqual(store.progress(for: .izabella).collectedDogIDs, [1])
+
+        store.deleteProfile(id: PlayerProfile.legacyLauraID)
+        XCTAssertFalse(store.profiles.contains { $0.id == PlayerProfile.legacyLauraID })
+
+        let reloaded = AppStore(defaults: defaults)
+        XCTAssertFalse(reloaded.profiles.contains { $0.id == PlayerProfile.legacyLauraID })
+        XCTAssertEqual(reloaded.profiles.map(\.id), [PlayerProfile.legacyIzabellaID])
+        XCTAssertEqual(reloaded.progress(for: .izabella).collectedDogIDs, [1])
+    }
+
+    func testRenameKeepsProgressAndResetClearsOnlyGameplay() throws {
+        let suiteName = "AppStoreRenameReset.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let store = AppStore(defaults: defaults)
+        let created = store.createProfile(name: "Izabella")
+        _ = store.finishRound(for: created, perfect: true)
+        XCTAssertEqual(store.progress(for: created).collectedDogIDs.count, 1)
+
+        store.renameProfile(id: created.id, to: "Iza")
+        let renamed = try XCTUnwrap(store.profile(id: created.id))
+        XCTAssertEqual(renamed.name, "Iza")
+        XCTAssertEqual(renamed.id, created.id)
+        XCTAssertEqual(store.progress(for: renamed).collectedDogIDs.count, 1)
+
+        store.resetProgress(for: created.id)
+        let afterReset = try XCTUnwrap(store.profile(id: created.id))
+        XCTAssertEqual(afterReset.name, "Iza")
+        XCTAssertEqual(store.progress(for: afterReset).collectedDogIDs, [])
+        XCTAssertEqual(store.progress(for: afterReset).completedRounds, 0)
+        XCTAssertEqual(store.progress(for: afterReset).learning.multiplication.unlockedLevel, 1)
+    }
+
+    func testDeleteProfileDoesNotAffectOtherProfilesAndPersists() {
+        let suiteName = "AppStoreDelete.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let store = AppStore(defaults: defaults)
+        let first = store.createProfile(name: "Laura")
+        let second = store.createProfile(name: "Izabella")
+        _ = store.finishRound(for: first, perfect: true)
+        _ = store.finishRound(for: second, perfect: true)
+
+        store.selectProfile(first)
+        store.deleteProfile(id: first.id)
+
+        XCTAssertNil(store.selectedProfile)
+        XCTAssertEqual(store.profiles.map(\.id), [second.id])
+        XCTAssertEqual(store.progress(for: second).collectedDogIDs.count, 1)
+        XCTAssertTrue(store.progress(for: first).collectedDogIDs.isEmpty)
+
+        let reloaded = AppStore(defaults: defaults)
+        XCTAssertEqual(reloaded.profiles.map(\.id), [second.id])
+        XCTAssertEqual(reloaded.progress(for: second).collectedDogIDs.count, 1)
+        XCTAssertFalse(reloaded.profiles.contains { $0.id == first.id })
+    }
+
+    func testMigrationDoesNotRecreateProfilesAfterFreshEmptyLaunch() {
+        let suiteName = "AppStoreNoReseed.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let firstLaunch = AppStore(defaults: defaults)
+        XCTAssertTrue(firstLaunch.profiles.isEmpty)
+
+        let secondLaunch = AppStore(defaults: defaults)
+        XCTAssertTrue(secondLaunch.profiles.isEmpty)
+    }
+
+    func testLanguagePreferenceDefaultsToSystemAndPersists() {
+        let suiteName = "AppStoreLanguage.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let store = AppStore(defaults: defaults)
+        XCTAssertEqual(store.languagePreference, .system)
+
+        store.setLanguagePreference(.english)
+        XCTAssertEqual(store.languagePreference, .english)
+        XCTAssertEqual(String(store.resolvedLocale.identifier.prefix(2)), "en")
+
+        let reloaded = AppStore(defaults: defaults)
+        XCTAssertEqual(reloaded.languagePreference, .english)
+
+        reloaded.setLanguagePreference(.hungarian)
+        XCTAssertEqual(String(reloaded.resolvedLocale.identifier.prefix(2)), "hu")
+        reloaded.setLanguagePreference(.system)
+        XCTAssertEqual(reloaded.languagePreference, .system)
+    }
 }

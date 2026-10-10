@@ -1,0 +1,42 @@
+{
+  "sourceLanguage": "hu",
+  "strings": {
+    "CFBundleDisplayName": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kutyajo matek"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doggy Math"
+          }
+        }
+      },
+      "comment": "Home screen app name"
+    },
+    "CFBundleName": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kutyajo matek"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doggy Math"
+          }
+        }
+      },
+      "comment": "Short bundle name"
+    }
+  },
+  "version": "1.0"
+}

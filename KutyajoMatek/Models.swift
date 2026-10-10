@@ -3,15 +3,59 @@ import SwiftUI
 
 struct PlayerProfile: Identifiable, Hashable, Codable, Sendable {
     let id: String
-    let name: String
-    let symbol: String
+    var name: String
+    var symbol: String
+    var avatarFileName: String?
+    var accentIndex: Int
 
-    static let laura = PlayerProfile(id: "laura", name: "Laura", symbol: "sparkles")
-    static let izabella = PlayerProfile(id: "isabella", name: "Izabella", symbol: "heart.fill")
-    static let all: [PlayerProfile] = [.izabella, .laura]
+    static let legacyLauraID = "laura"
+    static let legacyIzabellaID = "isabella"
+
+    /// Convenience profiles used by tests and legacy migration seeds.
+    static let laura = PlayerProfile(
+        id: legacyLauraID,
+        name: "Laura",
+        symbol: "sparkles",
+        avatarFileName: nil,
+        accentIndex: 1
+    )
+    static let izabella = PlayerProfile(
+        id: legacyIzabellaID,
+        name: "Izabella",
+        symbol: "heart.fill",
+        avatarFileName: nil,
+        accentIndex: 0
+    )
+
+    static let defaultSymbols = ["heart.fill", "sparkles", "star.fill", "hare.fill", "leaf.fill", "teddybear.fill"]
+    static let accentColors: [Color] = [
+        Color(red: 0.95, green: 0.39, blue: 0.58),
+        Color(red: 0.60, green: 0.42, blue: 0.86),
+        Color(red: 0.44, green: 0.77, blue: 0.68),
+        Color(red: 1.00, green: 0.70, blue: 0.55),
+        Color(red: 0.36, green: 0.62, blue: 0.90),
+        Color(red: 0.95, green: 0.55, blue: 0.35)
+    ]
+
+    static func makeNew(name: String, accentIndex: Int = 0) -> PlayerProfile {
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        let index = max(0, accentIndex)
+        return PlayerProfile(
+            id: UUID().uuidString,
+            name: trimmed,
+            symbol: defaultSymbols[index % defaultSymbols.count],
+            avatarFileName: nil,
+            accentIndex: index
+        )
+    }
 
     var tint: Color {
-        id == "laura" ? Color(red: 0.60, green: 0.42, blue: 0.86) : Color(red: 0.95, green: 0.39, blue: 0.58)
+        Self.accentColors[accentIndex % Self.accentColors.count]
+    }
+
+    var displayInitial: String {
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.first.map { String($0).uppercased() } ?? "?"
     }
 }
 
@@ -159,8 +203,8 @@ struct LearningLevel: Identifiable, Hashable, Codable, Sendable {
 
     func title(for operation: MathOperation) -> String {
         switch operation {
-        case .multiplication: "Szorzás \(table)-vel"
-        case .division: "Osztás \(table)-vel"
+        case .multiplication: L10n.multiplicationTableTitle(table)
+        case .division: L10n.divisionTableTitle(table)
         }
     }
 
@@ -208,17 +252,17 @@ enum GameMode: String, CaseIterable, Identifiable, Codable, Sendable {
 
     var title: String {
         switch self {
-        case .multiplication: "Szorzás"
-        case .division: "Osztás"
-        case .mixed: "Vegyes"
+        case .multiplication: L10n.text("Szorzás")
+        case .division: L10n.text("Osztás")
+        case .mixed: L10n.text("Vegyes")
         }
     }
 
     var subtitle: String {
         switch self {
-        case .multiplication: "Szorzótábla 2-től 10-ig, szintről szintre"
-        case .division: "Osztás 2-től 10-ig, szintről szintre"
-        case .mixed: "Szorzás és osztás felváltva"
+        case .multiplication: L10n.text("Szorzótábla 2-től 10-ig, szintről szintre")
+        case .division: L10n.text("Osztás 2-től 10-ig, szintről szintre")
+        case .mixed: L10n.text("Szorzás és osztás felváltva")
         }
     }
 
@@ -463,7 +507,7 @@ enum DogCatalog {
     ]
 
     static func name(for id: Int) -> String {
-        names.indices.contains(id) ? names[id] : "Kutyus"
+        names.indices.contains(id) ? names[id] : L10n.text("Kutyus")
     }
 
     static func imageName(for id: Int) -> String {

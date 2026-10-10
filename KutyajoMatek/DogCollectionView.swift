@@ -25,7 +25,7 @@ struct DogCollectionView: View {
 
             ScrollView {
                 VStack(spacing: 18) {
-                    Text("\(owned.count) / \(DogCatalog.count) kutyus már a tiéd")
+                    Text(L10n.dogsOwnedProgress(owned: owned.count, total: DogCatalog.count))
                         .font(.system(.headline, design: .rounded, weight: .semibold))
                         .foregroundStyle(AppTheme.lavender)
                         .padding(.top, 4)
@@ -72,6 +72,10 @@ struct DogCollectionView: View {
         .padding(12)
         .softCard()
         .accessibilityElement(children: .combine)
-        .accessibilityLabel(owned.contains(dogID) ? DogCatalog.name(for: dogID) : "Lezárt kutyus")
+        .accessibilityLabel(
+            owned.contains(dogID)
+                ? DogCatalog.name(for: dogID)
+                : L10n.text("Lezárt kutyus")
+        )
     }
 }

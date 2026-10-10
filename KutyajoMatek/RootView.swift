@@ -13,11 +13,14 @@ struct RootView: View {
                     .transition(.opacity.combined(with: .scale(scale: 1.04)))
             } else if let profile = store.selectedProfile {
                 NavigationStack {
-                    HomeView(profile: profile)
+                    HomeView(profileID: profile.id)
                 }
                 .transition(.opacity)
-            } else {
+            } else if store.hasProfiles {
                 ProfilePickerView()
+                    .transition(.opacity.combined(with: .move(edge: .bottom)))
+            } else {
+                CreateProfileView(isFirstLaunch: true)
                     .transition(.opacity.combined(with: .move(edge: .bottom)))
             }
         }
@@ -63,69 +66,5 @@ private struct SplashView: View {
             }
         }
         .accessibilityElement(children: .combine)
-    }
-}
-
-private struct ProfilePickerView: View {
-    @EnvironmentObject private var store: AppStore
-
-    var body: some View {
-        ScrollView {
-            VStack(spacing: 24) {
-                VStack(spacing: 8) {
-                    Image(systemName: "pawprint.circle.fill")
-                        .font(.system(size: 58))
-                        .foregroundStyle(AppTheme.pink)
-                    Text("Ki játszik most?")
-                        .font(.system(size: 32, weight: .heavy, design: .rounded))
-                        .foregroundStyle(AppTheme.ink)
-                    Text("Válaszd ki a profilodat!")
-                        .font(.system(.body, design: .rounded, weight: .medium))
-                        .foregroundStyle(.secondary)
-                }
-                .padding(.bottom, 6)
-
-                ForEach(PlayerProfile.all) { profile in
-                    Button {
-                        withAnimation(.spring(response: 0.45, dampingFraction: 0.82)) {
-                            store.selectedProfile = profile
-                        }
-                    } label: {
-                        HStack(spacing: 18) {
-                            ZStack {
-                                Circle()
-                                    .fill(profile.tint.opacity(0.13))
-                                    .frame(width: 76, height: 76)
-                                Image(systemName: profile.symbol)
-                                    .font(.system(size: 32, weight: .bold))
-                                    .foregroundStyle(profile.tint)
-                            }
-
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(profile.name)
-                                    .font(.system(.title2, design: .rounded, weight: .bold))
-                                    .foregroundStyle(AppTheme.ink)
-                                let dogCount = store.progress(for: profile).collectedDogIDs.count
-                                Text("\(dogCount) megszerzett kutyus")
-                                    .font(.system(.subheadline, design: .rounded, weight: .medium))
-                                    .foregroundStyle(.secondary)
-                            }
-
-                            Spacer()
-                            Image(systemName: "chevron.right.circle.fill")
-                                .font(.title2)
-                                .foregroundStyle(profile.tint)
-                        }
-                        .padding(18)
-                        .softCard()
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityHint("Megnyitja \(profile.name) játékát")
-                }
-            }
-            .padding(.horizontal, 22)
-            .padding(.top, 56)
-            .padding(.bottom, 30)
-        }
     }
 }
