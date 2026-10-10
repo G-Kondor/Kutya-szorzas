@@ -98,7 +98,7 @@ struct HomeView: View {
 
             ForEach(GameMode.allCases) { mode in
                 NavigationLink {
-                    GameView(profile: profile, mode: mode)
+                    destination(for: mode)
                 } label: {
                     HStack(spacing: 14) {
                         Image(systemName: mode.symbol)
@@ -111,13 +111,13 @@ struct HomeView: View {
                             Text(mode.title)
                                 .font(.system(.headline, design: .rounded, weight: .bold))
                                 .foregroundStyle(AppTheme.ink)
-                            Text(mode.subtitle)
+                            Text(modeSubtitle(for: mode))
                                 .font(.system(.caption, design: .rounded, weight: .medium))
                                 .foregroundStyle(.secondary)
                                 .multilineTextAlignment(.leading)
                         }
                         Spacer()
-                        Image(systemName: "play.circle.fill")
+                        Image(systemName: mode == .mixed ? "play.circle.fill" : "chevron.right.circle.fill")
                             .font(.title)
                             .foregroundStyle(modeColor(mode))
                     }
@@ -127,6 +127,24 @@ struct HomeView: View {
                 .buttonStyle(.plain)
             }
         }
+    }
+
+    @ViewBuilder
+    private func destination(for mode: GameMode) -> some View {
+        if let operation = mode.progressiveOperation {
+            LevelSelectView(profile: profile, operation: operation)
+        } else {
+            GameView(profile: profile, configuration: .mixed)
+        }
+    }
+
+    private func modeSubtitle(for mode: GameMode) -> String {
+        guard let operation = mode.progressiveOperation else {
+            return mode.subtitle
+        }
+        let path = store.learningPath(for: profile, operation: operation)
+        let level = LearningLevel(number: path.unlockedLevel)
+        return "\(mode.subtitle) · Most: \(level.shortLabel(for: operation))"
     }
 
     private var collectionPreview: some View {

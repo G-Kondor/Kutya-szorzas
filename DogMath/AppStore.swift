@@ -24,6 +24,14 @@ final class AppStore: ObservableObject {
         progressByProfile[profile.id] ?? PlayerProgress()
     }
 
+    func learningPath(for profile: PlayerProfile, operation: MathOperation) -> OperationPathProgress {
+        progress(for: profile).learning.path(for: operation)
+    }
+
+    func difficultyTier(for profile: PlayerProfile, operation: MathOperation, level: LearningLevel) -> Int {
+        learningPath(for: profile, operation: operation).difficultyTier(for: level)
+    }
+
     func recordAnswer(for profile: PlayerProfile, isCorrect: Bool) {
         guard isCorrect else { return }
         update(profile) { progress in
@@ -57,6 +65,50 @@ final class AppStore: ObservableObject {
         }
 
         return RoundResult(rewardDogID: reward, lostDogID: lost)
+    }
+
+    @discardableResult
+    func finishLearningRound(
+        for profile: PlayerProfile,
+        operation: MathOperation,
+        level: LearningLevel,
+        correctCount: Int
+    ) -> LearningRoundOutcome {
+        let isMasteryQuality = LearningRules.isMasteryQuality(correctCount: correctCount)
+        var unlockedLevel: LearningLevel?
+        var masteredAllLevels = false
+
+        update(profile) { progress in
+            progress.learning.updatePath(for: operation) { path in
+                guard level.number <= path.unlockedLevel else { return }
+
+                if isMasteryQuality {
+                    path.masteryWins[level.number - 1] += 1
+                }
+
+                let wins = path.masteryWins[level.number - 1]
+                let canUnlockNext =
+                    isMasteryQuality
+                    && wins >= LearningRules.masteryRoundsRequired
+                    && path.unlockedLevel == level.number
+                    && level.number < LearningLevel.count
+
+                if canUnlockNext {
+                    path.unlockedLevel = level.number + 1
+                    unlockedLevel = LearningLevel(number: level.number + 1)
+                }
+
+                masteredAllLevels =
+                    level.number == LearningLevel.count
+                    && path.masteryWins[level.number - 1] >= LearningRules.masteryRoundsRequired
+            }
+        }
+
+        return LearningRoundOutcome(
+            isMasteryQuality: isMasteryQuality,
+            unlockedLevel: unlockedLevel,
+            masteredAllLevels: masteredAllLevels
+        )
     }
 
     private func update(_ profile: PlayerProfile, mutation: (inout PlayerProgress) -> Void) {

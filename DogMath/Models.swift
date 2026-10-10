@@ -20,6 +20,183 @@ struct PlayerProgress: Codable, Equatable {
     var failedRounds: Int = 0
     var totalCorrectAnswers: Int = 0
     var completedRounds: Int = 0
+    var learning: LearningProgress = LearningProgress()
+
+    enum CodingKeys: String, CodingKey {
+        case collectedDogIDs
+        case failedRounds
+        case totalCorrectAnswers
+        case completedRounds
+        case learning
+    }
+
+    init(
+        collectedDogIDs: [Int] = [],
+        failedRounds: Int = 0,
+        totalCorrectAnswers: Int = 0,
+        completedRounds: Int = 0,
+        learning: LearningProgress = LearningProgress()
+    ) {
+        self.collectedDogIDs = collectedDogIDs
+        self.failedRounds = failedRounds
+        self.totalCorrectAnswers = totalCorrectAnswers
+        self.completedRounds = completedRounds
+        self.learning = learning
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        collectedDogIDs = try container.decodeIfPresent([Int].self, forKey: .collectedDogIDs) ?? []
+        failedRounds = try container.decodeIfPresent(Int.self, forKey: .failedRounds) ?? 0
+        totalCorrectAnswers = try container.decodeIfPresent(Int.self, forKey: .totalCorrectAnswers) ?? 0
+        completedRounds = try container.decodeIfPresent(Int.self, forKey: .completedRounds) ?? 0
+        learning = try container.decodeIfPresent(LearningProgress.self, forKey: .learning) ?? LearningProgress()
+    }
+}
+
+struct LearningProgress: Codable, Equatable {
+    var multiplication: OperationPathProgress = OperationPathProgress()
+    var division: OperationPathProgress = OperationPathProgress()
+
+    func path(for operation: MathOperation) -> OperationPathProgress {
+        switch operation {
+        case .multiplication: multiplication
+        case .division: division
+        }
+    }
+
+    mutating func updatePath(for operation: MathOperation, mutation: (inout OperationPathProgress) -> Void) {
+        switch operation {
+        case .multiplication: mutation(&multiplication)
+        case .division: mutation(&division)
+        }
+    }
+}
+
+struct OperationPathProgress: Codable, Equatable {
+    /// Highest unlocked level number in `1...LearningLevel.count`.
+    var unlockedLevel: Int = 1
+    /// Mastery-quality round counts per level, indexed by `levelNumber - 1`.
+    var masteryWins: [Int]
+
+    enum CodingKeys: String, CodingKey {
+        case unlockedLevel
+        case masteryWins
+    }
+
+    init(unlockedLevel: Int = 1, masteryWins: [Int]? = nil) {
+        self.unlockedLevel = min(max(unlockedLevel, 1), LearningLevel.count)
+        self.masteryWins = Self.normalizedWins(masteryWins)
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        unlockedLevel = min(
+            max(try container.decodeIfPresent(Int.self, forKey: .unlockedLevel) ?? 1, 1),
+            LearningLevel.count
+        )
+        masteryWins = Self.normalizedWins(try container.decodeIfPresent([Int].self, forKey: .masteryWins))
+    }
+
+    func masteryWins(for level: LearningLevel) -> Int {
+        masteryWins[level.number - 1]
+    }
+
+    func status(for level: LearningLevel) -> LevelStatus {
+        if level.number > unlockedLevel {
+            return .locked
+        }
+        if level.number < unlockedLevel || masteryWins(for: level) >= LearningRules.masteryRoundsRequired {
+            return .completed
+        }
+        return .current
+    }
+
+    func difficultyTier(for level: LearningLevel) -> Int {
+        min(3, masteryWins(for: level) + 1)
+    }
+
+    private static func normalizedWins(_ wins: [Int]?) -> [Int] {
+        var values = wins ?? Array(repeating: 0, count: LearningLevel.count)
+        if values.count < LearningLevel.count {
+            values.append(contentsOf: Array(repeating: 0, count: LearningLevel.count - values.count))
+        } else if values.count > LearningLevel.count {
+            values = Array(values.prefix(LearningLevel.count))
+        }
+        return values.map { max(0, $0) }
+    }
+}
+
+enum LevelStatus: Equatable, Sendable {
+    case locked
+    case current
+    case completed
+}
+
+enum LearningRules {
+    static let questionsPerRound = 5
+    static let masteryAccuracyThreshold = 0.8
+    static let masteryRoundsRequired = 2
+    static let minimumCorrectForMastery = Int((Double(questionsPerRound) * masteryAccuracyThreshold).rounded(.up))
+
+    static func isMasteryQuality(correctCount: Int) -> Bool {
+        correctCount >= minimumCorrectForMastery
+    }
+}
+
+struct LearningLevel: Identifiable, Hashable, Codable, Sendable {
+    static let count = 9
+    static let all: [LearningLevel] = (1...count).map(LearningLevel.init(number:))
+
+    let number: Int
+
+    var id: Int { number }
+    var table: Int { number + 1 }
+
+    init(number: Int) {
+        self.number = min(max(number, 1), Self.count)
+    }
+
+    func title(for operation: MathOperation) -> String {
+        switch operation {
+        case .multiplication: "Szorzás \(table)-vel"
+        case .division: "Osztás \(table)-vel"
+        }
+    }
+
+    func shortLabel(for operation: MathOperation) -> String {
+        switch operation {
+        case .multiplication: "× \(table)"
+        case .division: "÷ \(table)"
+        }
+    }
+}
+
+struct PracticeConfiguration: Hashable, Sendable {
+    let mode: GameMode
+    let level: LearningLevel?
+
+    static let mixed = PracticeConfiguration(mode: .mixed, level: nil)
+
+    static func progressive(operation: MathOperation, level: LearningLevel) -> PracticeConfiguration {
+        let mode: GameMode = operation == .multiplication ? .multiplication : .division
+        return PracticeConfiguration(mode: mode, level: level)
+    }
+
+    var operation: MathOperation? {
+        switch mode {
+        case .multiplication: .multiplication
+        case .division: .division
+        case .mixed: nil
+        }
+    }
+
+    var navigationTitle: String {
+        if let level, let operation {
+            return "\(mode.title) · \(level.shortLabel(for: operation))"
+        }
+        return mode.title
+    }
 }
 
 enum GameMode: String, CaseIterable, Identifiable, Codable, Sendable {
@@ -39,8 +216,8 @@ enum GameMode: String, CaseIterable, Identifiable, Codable, Sendable {
 
     var subtitle: String {
         switch self {
-        case .multiplication: "Öt szorzás a százas számkörben"
-        case .division: "Öt maradék nélküli osztás"
+        case .multiplication: "Szorzótábla 2-től 10-ig, szintről szintre"
+        case .division: "Osztás 2-től 10-ig, szintről szintre"
         case .mixed: "Szorzás és osztás felváltva"
         }
     }
@@ -50,6 +227,14 @@ enum GameMode: String, CaseIterable, Identifiable, Codable, Sendable {
         case .multiplication: "multiply"
         case .division: "divide"
         case .mixed: "shuffle"
+        }
+    }
+
+    var progressiveOperation: MathOperation? {
+        switch self {
+        case .multiplication: .multiplication
+        case .division: .division
+        case .mixed: nil
         }
     }
 }
@@ -72,22 +257,121 @@ struct MathQuestion: Identifiable, Equatable, Sendable {
     }
 }
 
+struct LearningRoundOutcome: Equatable, Sendable {
+    let isMasteryQuality: Bool
+    let unlockedLevel: LearningLevel?
+    let masteredAllLevels: Bool
+}
+
 enum QuestionFactory {
     static func makeRound(mode: GameMode) -> [MathQuestion] {
-        (0..<5).map { index in
-            let operation: MathOperation = switch mode {
-            case .multiplication: .multiplication
-            case .division: .division
-            case .mixed: index.isMultiple(of: 2) ? .multiplication : .division
+        makeRound(configuration: PracticeConfiguration(mode: mode, level: nil), difficultyTier: 1)
+    }
+
+    static func makeRound(configuration: PracticeConfiguration, difficultyTier: Int) -> [MathQuestion] {
+        switch configuration.mode {
+        case .mixed:
+            return makeMixedRound()
+        case .multiplication, .division:
+            let operation = configuration.operation ?? .multiplication
+            if let level = configuration.level {
+                return makeTableRound(
+                    operation: operation,
+                    table: level.table,
+                    difficultyTier: difficultyTier
+                )
             }
-            return makeQuestion(operation: operation)
+            return (0..<LearningRules.questionsPerRound).map { _ in
+                makeQuestion(operation: operation)
+            }
         }
     }
 
     static func makeQuestion(operation: MathOperation) -> MathQuestion {
         let firstFactor = Int.random(in: 1...10)
         let secondFactor = Int.random(in: 1...10)
+        return makeQuestion(operation: operation, firstFactor: firstFactor, secondFactor: secondFactor)
+    }
 
+    static func makeTableQuestion(
+        operation: MathOperation,
+        table: Int,
+        otherFactor: Int,
+        swapOperands: Bool = false
+    ) -> MathQuestion {
+        switch operation {
+        case .multiplication:
+            let left = swapOperands ? otherFactor : table
+            let right = swapOperands ? table : otherFactor
+            return makeQuestion(operation: .multiplication, firstFactor: left, secondFactor: right)
+        case .division:
+            return makeQuestion(operation: .division, firstFactor: otherFactor, secondFactor: table)
+        }
+    }
+
+    private static func makeMixedRound() -> [MathQuestion] {
+        (0..<LearningRules.questionsPerRound).map { index in
+            let operation: MathOperation = index.isMultiple(of: 2) ? .multiplication : .division
+            return makeQuestion(operation: operation)
+        }
+    }
+
+    private static func makeTableRound(
+        operation: MathOperation,
+        table: Int,
+        difficultyTier: Int
+    ) -> [MathQuestion] {
+        let cappedTier = min(max(difficultyTier, 1), 3)
+        let poolMax = factorPoolMax(for: cappedTier)
+        var usedFactors = Set<Int>()
+        var questions: [MathQuestion] = []
+
+        for index in 0..<LearningRules.questionsPerRound {
+            let localMax = min(withinRoundMax(for: index), poolMax)
+            let factor = nextFactor(in: 1...localMax, excluding: &usedFactors)
+            let allowSwap = cappedTier >= 2 && operation == .multiplication
+            let swapOperands = allowSwap && Bool.random()
+            questions.append(
+                makeTableQuestion(
+                    operation: operation,
+                    table: table,
+                    otherFactor: factor,
+                    swapOperands: swapOperands
+                )
+            )
+        }
+
+        return questions
+    }
+
+    private static func factorPoolMax(for difficultyTier: Int) -> Int {
+        switch difficultyTier {
+        case 1: 5
+        case 2: 8
+        default: 10
+        }
+    }
+
+    private static func withinRoundMax(for index: Int) -> Int {
+        switch index {
+        case 0, 1: 5
+        case 2, 3: 8
+        default: 10
+        }
+    }
+
+    private static func nextFactor(in range: ClosedRange<Int>, excluding used: inout Set<Int>) -> Int {
+        let available = Array(range).filter { !used.contains($0) }
+        let chosen = available.randomElement() ?? Int.random(in: range)
+        used.insert(chosen)
+        return chosen
+    }
+
+    private static func makeQuestion(
+        operation: MathOperation,
+        firstFactor: Int,
+        secondFactor: Int
+    ) -> MathQuestion {
         let left: Int
         let right: Int
         let answer: Int

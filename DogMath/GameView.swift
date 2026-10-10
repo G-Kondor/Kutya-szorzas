@@ -6,7 +6,7 @@ struct GameView: View {
     @Environment(\.dismiss) private var dismiss
 
     let profile: PlayerProfile
-    let mode: GameMode
+    let configuration: PracticeConfiguration
 
     @State private var questions: [MathQuestion]
     @State private var currentIndex = 0
@@ -14,12 +14,25 @@ struct GameView: View {
     @State private var correctCount = 0
     @State private var madeMistake = false
     @State private var result: RoundResult?
+    @State private var learningOutcome: LearningRoundOutcome?
     @State private var isShowingSummary = false
+    @State private var difficultyTier: Int
 
-    init(profile: PlayerProfile, mode: GameMode) {
+    init(profile: PlayerProfile, configuration: PracticeConfiguration, difficultyTier: Int = 1) {
         self.profile = profile
-        self.mode = mode
-        _questions = State(initialValue: QuestionFactory.makeRound(mode: mode))
+        self.configuration = configuration
+        self._difficultyTier = State(initialValue: difficultyTier)
+        _questions = State(
+            initialValue: QuestionFactory.makeRound(
+                configuration: configuration,
+                difficultyTier: difficultyTier
+            )
+        )
+    }
+
+    /// Backward-compatible entry for mixed or open practice by mode alone.
+    init(profile: PlayerProfile, mode: GameMode) {
+        self.init(profile: profile, configuration: PracticeConfiguration(mode: mode, level: nil))
     }
 
     private var question: MathQuestion {
@@ -40,7 +53,7 @@ struct GameView: View {
             .padding(.horizontal, 20)
             .padding(.top, 12)
         }
-        .navigationTitle(mode.title)
+        .navigationTitle(configuration.navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
         .interactiveDismissDisabled(selectedAnswer != nil)
         .sheet(isPresented: $isShowingSummary) {
@@ -48,6 +61,8 @@ struct GameView: View {
                 profile: profile,
                 correctCount: correctCount,
                 result: result ?? RoundResult(rewardDogID: nil, lostDogID: nil),
+                learningOutcome: learningOutcome,
+                configuration: configuration,
                 onPlayAgain: startNewRound,
                 onFinish: { dismiss() }
             )
@@ -58,14 +73,14 @@ struct GameView: View {
     private var progressHeader: some View {
         VStack(spacing: 10) {
             HStack {
-                Label("\(currentIndex + 1) / 5", systemImage: "list.number")
+                Label("\(currentIndex + 1) / \(LearningRules.questionsPerRound)", systemImage: "list.number")
                 Spacer()
                 Label("\(correctCount)", systemImage: "star.fill")
                     .foregroundStyle(AppTheme.pink)
             }
             .font(.system(.headline, design: .rounded, weight: .bold))
 
-            ProgressView(value: Double(currentIndex + 1), total: 5)
+            ProgressView(value: Double(currentIndex + 1), total: Double(LearningRules.questionsPerRound))
                 .tint(profile.tint)
                 .scaleEffect(x: 1, y: 1.8)
         }
@@ -173,18 +188,39 @@ struct GameView: View {
                 selectedAnswer = nil
             }
         } else {
-            result = store.finishRound(for: profile, perfect: !madeMistake && correctCount == 5)
+            let perfect = !madeMistake && correctCount == LearningRules.questionsPerRound
+            result = store.finishRound(for: profile, perfect: perfect)
+
+            if let level = configuration.level, let operation = configuration.operation {
+                learningOutcome = store.finishLearningRound(
+                    for: profile,
+                    operation: operation,
+                    level: level,
+                    correctCount: correctCount
+                )
+            } else {
+                learningOutcome = nil
+            }
+
             isShowingSummary = true
         }
     }
 
     private func startNewRound() {
-        questions = QuestionFactory.makeRound(mode: mode)
+        if let level = configuration.level, let operation = configuration.operation {
+            difficultyTier = store.difficultyTier(for: profile, operation: operation, level: level)
+        }
+
+        questions = QuestionFactory.makeRound(
+            configuration: configuration,
+            difficultyTier: difficultyTier
+        )
         currentIndex = 0
         selectedAnswer = nil
         correctCount = 0
         madeMistake = false
         result = nil
+        learningOutcome = nil
         isShowingSummary = false
     }
 
@@ -221,10 +257,12 @@ private struct RoundSummaryView: View {
     let profile: PlayerProfile
     let correctCount: Int
     let result: RoundResult
+    let learningOutcome: LearningRoundOutcome?
+    let configuration: PracticeConfiguration
     let onPlayAgain: () -> Void
     let onFinish: () -> Void
 
-    private var isPerfect: Bool { correctCount == 5 }
+    private var isPerfect: Bool { correctCount == LearningRules.questionsPerRound }
 
     var body: some View {
         ZStack {
@@ -241,6 +279,10 @@ private struct RoundSummaryView: View {
                     Text("Ő \(DogCatalog.name(for: dogID))!")
                         .font(.system(.title2, design: .rounded, weight: .heavy))
                         .foregroundStyle(AppTheme.pink)
+                } else if learningOutcome?.unlockedLevel != nil || learningOutcome?.masteredAllLevels == true {
+                    Image(systemName: "star.circle.fill")
+                        .font(.system(size: 92, weight: .bold))
+                        .foregroundStyle(AppTheme.peach)
                 } else {
                     Image(systemName: isPerfect ? "trophy.fill" : "heart.circle.fill")
                         .font(.system(size: 92, weight: .bold))
@@ -258,12 +300,18 @@ private struct RoundSummaryView: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 20)
 
-                Text("\(correctCount) / 5 helyes válasz")
+                Text("\(correctCount) / \(LearningRules.questionsPerRound) helyes válasz")
                     .font(.system(.headline, design: .rounded, weight: .bold))
                     .foregroundStyle(profile.tint)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
                     .background(.white.opacity(0.82), in: Capsule())
+
+                if let level = configuration.level, let operation = configuration.operation {
+                    Text(level.shortLabel(for: operation))
+                        .font(.system(.subheadline, design: .rounded, weight: .bold))
+                        .foregroundStyle(AppTheme.lavender)
+                }
 
                 Spacer()
 
@@ -286,16 +334,32 @@ private struct RoundSummaryView: View {
     }
 
     private var summaryTitle: String {
+        if let unlocked = learningOutcome?.unlockedLevel, let operation = configuration.operation {
+            return "Szint nyílt! \(unlocked.shortLabel(for: operation))"
+        }
+        if learningOutcome?.masteredAllLevels == true {
+            return "Minden szint megvan!"
+        }
         if result.rewardDogID != nil { return "Hibátlan kör! Új kutyus érkezett!" }
         if isPerfect { return "Fantasztikus! Mind a 40 kutyus a tiéd!" }
         if let lostID = result.lostDogID { return "Most \(DogCatalog.name(for: lostID)) elbúcsúzott" }
+        if learningOutcome?.isMasteryQuality == true { return "Ügyes kör!" }
         return "Szép próbálkozás!"
     }
 
     private var summaryMessage: String {
+        if let unlocked = learningOutcome?.unlockedLevel, let operation = configuration.operation {
+            return "Fantasztikus munka! Most már gyakorolhatod: \(unlocked.title(for: operation))."
+        }
+        if learningOutcome?.masteredAllLevels == true {
+            return "Végigvitted az egész tanulóutat. Büszkék lehettek rád a kutyusok is!"
+        }
         if result.rewardDogID != nil { return "Öt jó válasz egymás után — megérdemelted az új barátodat." }
         if isPerfect { return "A teljes kutyagyűjteményt megszerezted. Ez óriási teljesítmény!" }
         if result.lostDogID != nil { return "Ez volt a harmadik elrontott kör, ezért egy kutyus visszakerült a gyűjteménybe. A következő körben újra megszerezheted!" }
-        return "Semmi baj: minden körrel ügyesebb leszel. Három elrontott kör után elveszíthetsz egy kutyust." 
+        if learningOutcome?.isMasteryQuality == true {
+            return "Legalább 4 jó válasz — így közelebb kerültél a következő szinthez. Hajrá!"
+        }
+        return "Semmi baj: minden körrel ügyesebb leszel. Három elrontott kör után elveszíthetsz egy kutyust."
     }
 }
