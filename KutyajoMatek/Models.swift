@@ -252,17 +252,17 @@ enum GameMode: String, CaseIterable, Identifiable, Codable, Sendable {
 
     var title: String {
         switch self {
-        case .multiplication: String(localized: "Szorzás")
-        case .division: String(localized: "Osztás")
-        case .mixed: String(localized: "Vegyes")
+        case .multiplication: L10n.text("Szorzás")
+        case .division: L10n.text("Osztás")
+        case .mixed: L10n.text("Vegyes")
         }
     }
 
     var subtitle: String {
         switch self {
-        case .multiplication: String(localized: "Szorzótábla 2-től 10-ig, szintről szintre")
-        case .division: String(localized: "Osztás 2-től 10-ig, szintről szintre")
-        case .mixed: String(localized: "Szorzás és osztás felváltva")
+        case .multiplication: L10n.text("Szorzótábla 2-től 10-ig, szintről szintre")
+        case .division: L10n.text("Osztás 2-től 10-ig, szintről szintre")
+        case .mixed: L10n.text("Szorzás és osztás felváltva")
         }
     }
 
@@ -507,7 +507,7 @@ enum DogCatalog {
     ]
 
     static func name(for id: Int) -> String {
-        names.indices.contains(id) ? names[id] : String(localized: "Kutyus")
+        names.indices.contains(id) ? names[id] : L10n.text("Kutyus")
     }
 
     static func imageName(for id: Int) -> String {

@@ -75,7 +75,7 @@ struct DogCollectionView: View {
         .accessibilityLabel(
             owned.contains(dogID)
                 ? DogCatalog.name(for: dogID)
-                : String(localized: "Lezárt kutyus")
+                : L10n.text("Lezárt kutyus")
         )
     }
 }

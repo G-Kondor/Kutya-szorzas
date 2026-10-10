@@ -65,6 +65,8 @@ struct ProfilePickerView: View {
                 }
                 .buttonStyle(.plain)
 
+                LanguagePickerCard()
+
                 Button {
                     isShowingParents = true
                 } label: {
@@ -299,6 +301,8 @@ struct EditProfileView: View {
                             .font(.system(.title3, design: .rounded, weight: .semibold))
                             .padding(16)
                             .softCard()
+
+                        LanguagePickerCard()
 
                         Button {
                             save(profile)

@@ -8,6 +8,8 @@ struct KutyajoMatekApp: App {
         WindowGroup {
             RootView()
                 .environmentObject(store)
+                .environment(\.locale, store.resolvedLocale)
+                .id(store.languagePreference.rawValue)
                 .preferredColorScheme(.light)
         }
     }

@@ -10,7 +10,7 @@ struct ParentSectionView: View {
     @State private var profilePendingReset: PlayerProfile?
     @State private var profilePendingDelete: PlayerProfile?
 
-    private var gateQuestion: String { String(localized: "Mennyi 7 + 5?") }
+    private var gateQuestion: String { L10n.text("Mennyi 7 + 5?") }
     private let gateSolution = "12"
 
     var body: some View {
@@ -95,14 +95,14 @@ struct ParentSectionView: View {
         if let profile = profilePendingReset {
             return L10n.resetProgressTitle(profile.name)
         }
-        return String(localized: "Haladás törlése?")
+        return L10n.text("Haladás törlése?")
     }
 
     private var deleteTitle: String {
         if let profile = profilePendingDelete {
             return L10n.deleteProfileTitle(profile.name)
         }
-        return String(localized: "Profil törlése?")
+        return L10n.text("Profil törlése?")
     }
 
     private var gateCard: some View {

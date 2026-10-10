@@ -12,14 +12,26 @@ final class AppStore: ObservableObject {
     @Published var selectedProfile: PlayerProfile?
     @Published private(set) var profiles: [PlayerProfile]
     @Published private(set) var progressByProfile: [String: PlayerProgress]
+    @Published private(set) var languagePreference: AppLanguagePreference
 
     private let defaults: UserDefaults
     private let stateKey = "kutyajoMatek.appState.v2"
     private let migrationFlagKey = "kutyajoMatek.didMigrateProfiles.v2"
+    private let languageKey = "kutyajoMatek.languagePreference.v1"
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
 
+        if
+            let raw = defaults.string(forKey: languageKey),
+            let savedLanguage = AppLanguagePreference(rawValue: raw)
+        {
+            languagePreference = savedLanguage
+        } else {
+            languagePreference = .system
+        }
+
+        let shouldPersistMigratedState: Bool
         if
             let data = defaults.data(forKey: stateKey),
             let saved = try? JSONDecoder().decode(PersistedAppState.self, from: data)
@@ -28,16 +40,30 @@ final class AppStore: ObservableObject {
             progressByProfile = saved.progressByProfile
             selectedProfile = saved.profiles.first { $0.id == saved.selectedProfileID }
             defaults.set(true, forKey: migrationFlagKey)
+            shouldPersistMigratedState = false
         } else {
             let migrated = Self.migrateLegacyIfNeeded(defaults: defaults)
             profiles = migrated.profiles
             progressByProfile = migrated.progressByProfile
             selectedProfile = nil
+            shouldPersistMigratedState = true
+        }
+
+        LanguageSettings.locale = languagePreference.resolvedLocale
+        if shouldPersistMigratedState {
             persist()
         }
     }
 
     var hasProfiles: Bool { !profiles.isEmpty }
+
+    var resolvedLocale: Locale { languagePreference.resolvedLocale }
+
+    func setLanguagePreference(_ preference: AppLanguagePreference) {
+        languagePreference = preference
+        LanguageSettings.locale = preference.resolvedLocale
+        defaults.set(preference.rawValue, forKey: languageKey)
+    }
 
     func profile(id: String) -> PlayerProfile? {
         profiles.first { $0.id == id }

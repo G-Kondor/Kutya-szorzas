@@ -149,7 +149,7 @@ struct GameView: View {
         if let selectedAnswer {
             let isCorrect = selectedAnswer == question.answer
             Label(
-                isCorrect ? String(localized: "Szuper! Ez talált!") : L10n.almostCorrect(answer: question.answer),
+                isCorrect ? L10n.text("Szuper! Ez talált!") : L10n.almostCorrect(answer: question.answer),
                 systemImage: isCorrect ? "checkmark.circle.fill" : "heart.fill"
             )
             .font(.system(.headline, design: .rounded, weight: .bold))
@@ -342,13 +342,13 @@ private struct RoundSummaryView: View {
             return L10n.levelUnlocked(unlocked.shortLabel(for: operation))
         }
         if learningOutcome?.masteredAllLevels == true {
-            return String(localized: "Minden szint megvan!")
+            return L10n.text("Minden szint megvan!")
         }
-        if result.rewardDogID != nil { return String(localized: "Hibátlan kör! Új kutyus érkezett!") }
-        if isPerfect { return String(localized: "Fantasztikus! Mind a 40 kutyus a tiéd!") }
+        if result.rewardDogID != nil { return L10n.text("Hibátlan kör! Új kutyus érkezett!") }
+        if isPerfect { return L10n.text("Fantasztikus! Mind a 40 kutyus a tiéd!") }
         if let lostID = result.lostDogID { return L10n.dogSaidGoodbye(DogCatalog.name(for: lostID)) }
-        if learningOutcome?.isMasteryQuality == true { return String(localized: "Ügyes kör!") }
-        return String(localized: "Szép próbálkozás!")
+        if learningOutcome?.isMasteryQuality == true { return L10n.text("Ügyes kör!") }
+        return L10n.text("Szép próbálkozás!")
     }
 
     private var summaryMessage: String {
@@ -356,20 +356,20 @@ private struct RoundSummaryView: View {
             return L10n.practiceUnlocked(unlocked.title(for: operation))
         }
         if learningOutcome?.masteredAllLevels == true {
-            return String(localized: "Végigvitted az egész tanulóutat. Büszkék lehettek rád a kutyusok is!")
+            return L10n.text("Végigvitted az egész tanulóutat. Büszkék lehettek rád a kutyusok is!")
         }
         if result.rewardDogID != nil {
-            return String(localized: "Öt jó válasz egymás után — megérdemelted az új barátodat.")
+            return L10n.text("Öt jó válasz egymás után — megérdemelted az új barátodat.")
         }
         if isPerfect {
-            return String(localized: "A teljes kutyagyűjteményt megszerezted. Ez óriási teljesítmény!")
+            return L10n.text("A teljes kutyagyűjteményt megszerezted. Ez óriási teljesítmény!")
         }
         if result.lostDogID != nil {
-            return String(localized: "Ez volt a harmadik elrontott kör, ezért egy kutyus visszakerült a gyűjteménybe. A következő körben újra megszerezheted!")
+            return L10n.text("Ez volt a harmadik elrontott kör, ezért egy kutyus visszakerült a gyűjteménybe. A következő körben újra megszerezheted!")
         }
         if learningOutcome?.isMasteryQuality == true {
-            return String(localized: "Legalább 4 jó válasz — így közelebb kerültél a következő szinthez. Hajrá!")
+            return L10n.text("Legalább 4 jó válasz — így közelebb kerültél a következő szinthez. Hajrá!")
         }
-        return String(localized: "Semmi baj: minden körrel ügyesebb leszel. Három elrontott kör után elveszíthetsz egy kutyust.")
+        return L10n.text("Semmi baj: minden körrel ügyesebb leszel. Három elrontott kör után elveszíthetsz egy kutyust.")
     }
 }

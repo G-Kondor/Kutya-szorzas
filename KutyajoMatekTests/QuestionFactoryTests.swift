@@ -397,4 +397,25 @@ final class AppStoreTests: XCTestCase {
         let secondLaunch = AppStore(defaults: defaults)
         XCTAssertTrue(secondLaunch.profiles.isEmpty)
     }
+
+    func testLanguagePreferenceDefaultsToSystemAndPersists() {
+        let suiteName = "AppStoreLanguage.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let store = AppStore(defaults: defaults)
+        XCTAssertEqual(store.languagePreference, .system)
+
+        store.setLanguagePreference(.english)
+        XCTAssertEqual(store.languagePreference, .english)
+        XCTAssertEqual(String(store.resolvedLocale.identifier.prefix(2)), "en")
+
+        let reloaded = AppStore(defaults: defaults)
+        XCTAssertEqual(reloaded.languagePreference, .english)
+
+        reloaded.setLanguagePreference(.hungarian)
+        XCTAssertEqual(String(reloaded.resolvedLocale.identifier.prefix(2)), "hu")
+        reloaded.setLanguagePreference(.system)
+        XCTAssertEqual(reloaded.languagePreference, .system)
+    }
 }
