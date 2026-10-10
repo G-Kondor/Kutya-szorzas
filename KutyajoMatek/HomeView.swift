@@ -2,7 +2,14 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject private var store: AppStore
-    let profile: PlayerProfile
+    let profileID: String
+
+    @State private var isEditingProfile = false
+    @State private var isShowingParents = false
+
+    private var profile: PlayerProfile {
+        store.profile(id: profileID) ?? store.selectedProfile ?? .laura
+    }
 
     private var progress: PlayerProgress {
         store.progress(for: profile)
@@ -15,6 +22,7 @@ struct HomeView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     welcomeCard
+                    profileActions
                     statsRow
                     gameModes
                     collectionPreview
@@ -29,32 +37,35 @@ struct HomeView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Profilváltás", systemImage: "person.2.fill") {
                     withAnimation(.easeInOut) {
-                        store.selectedProfile = nil
+                        store.clearSelectedProfile()
                     }
                 }
                 .labelStyle(.iconOnly)
                 .accessibilityHint("Visszalép a profilválasztóhoz")
             }
         }
+        .sheet(isPresented: $isEditingProfile) {
+            NavigationStack {
+                EditProfileView(profileID: profileID)
+            }
+            .presentationDetents([.medium, .large])
+        }
+        .sheet(isPresented: $isShowingParents) {
+            NavigationStack {
+                ParentSectionView()
+            }
+        }
     }
 
     private var welcomeCard: some View {
         HStack(spacing: 16) {
-            ZStack {
-                Circle()
-                    .fill(profile.tint.opacity(0.12))
-                    .frame(width: 108, height: 108)
-
-                if let dogID = progress.collectedDogIDs.last {
-                    DogPortrait(id: dogID)
-                        .frame(width: 92, height: 92)
-                        .clipShape(Circle())
-                } else {
-                    Image(systemName: "pawprint.fill")
-                        .font(.system(size: 48, weight: .bold))
-                        .foregroundStyle(profile.tint)
-                }
+            Button {
+                isEditingProfile = true
+            } label: {
+                ProfileAvatarView(profile: profile, size: 108)
             }
+            .buttonStyle(.plain)
+            .accessibilityHint("Profil szerkesztése")
 
             VStack(alignment: .leading, spacing: 7) {
                 Text(progress.collectedDogIDs.isEmpty ? "Szerezd meg az első kutyusod!" : "Ügyesen gyűjtöd a kutyusokat!")
@@ -68,6 +79,45 @@ struct HomeView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(18)
         .softCard()
+    }
+
+    private var profileActions: some View {
+        HStack(spacing: 10) {
+            Button {
+                isEditingProfile = true
+            } label: {
+                Label("Profil", systemImage: "pencil.circle.fill")
+                    .font(.system(.subheadline, design: .rounded, weight: .bold))
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .foregroundStyle(profile.tint)
+                    .background(profile.tint.opacity(0.12), in: RoundedRectangle(cornerRadius: 14))
+            }
+            .buttonStyle(.plain)
+
+            Button {
+                withAnimation(.easeInOut) {
+                    store.clearSelectedProfile()
+                }
+            } label: {
+                Label("Váltás", systemImage: "person.2.fill")
+                    .font(.system(.subheadline, design: .rounded, weight: .bold))
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .foregroundStyle(AppTheme.lavender)
+                    .background(AppTheme.lavender.opacity(0.12), in: RoundedRectangle(cornerRadius: 14))
+            }
+            .buttonStyle(.plain)
+
+            Button {
+                isShowingParents = true
+            } label: {
+                Label("Szülők", systemImage: "lock.shield.fill")
+                    .font(.system(.subheadline, design: .rounded, weight: .bold))
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .foregroundStyle(AppTheme.ink.opacity(0.7))
+                    .background(AppTheme.ink.opacity(0.06), in: RoundedRectangle(cornerRadius: 14))
+            }
+            .buttonStyle(.plain)
+        }
     }
 
     private var statsRow: some View {
