@@ -4,9 +4,10 @@ import Foundation
 /// Plain `Text("…")` views follow the SwiftUI `locale` environment.
 enum L10n {
     private static var locale: Locale { LanguageSettings.locale }
+    private static var bundle: Bundle { LanguageSettings.bundle }
 
     private static func localized(_ value: String.LocalizationValue) -> String {
-        String(localized: value, locale: locale)
+        String(localized: value, bundle: bundle, locale: locale)
     }
 
     static func hiName(_ name: String) -> String {
@@ -98,11 +99,11 @@ enum L10n {
     }
 
     static func spokenTimes() -> String {
-        String(localized: "szorozva", locale: locale)
+        localized("szorozva")
     }
 
     static func spokenDivided() -> String {
-        String(localized: "osztva", locale: locale)
+        localized("osztva")
     }
 
     static func text(_ key: String.LocalizationValue) -> String {

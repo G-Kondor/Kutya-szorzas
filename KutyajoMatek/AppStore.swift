@@ -49,7 +49,7 @@ final class AppStore: ObservableObject {
             shouldPersistMigratedState = true
         }
 
-        LanguageSettings.locale = languagePreference.resolvedLocale
+        LanguageSettings.apply(languagePreference)
         if shouldPersistMigratedState {
             persist()
         }
@@ -61,7 +61,7 @@ final class AppStore: ObservableObject {
 
     func setLanguagePreference(_ preference: AppLanguagePreference) {
         languagePreference = preference
-        LanguageSettings.locale = preference.resolvedLocale
+        LanguageSettings.apply(preference)
         defaults.set(preference.rawValue, forKey: languageKey)
     }
 
