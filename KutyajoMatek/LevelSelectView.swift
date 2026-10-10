@@ -14,7 +14,9 @@ struct LevelSelectView: View {
     }
 
     private var title: String {
-        operation == .multiplication ? "Szorzás szintjei" : "Osztás szintjei"
+        operation == .multiplication
+            ? String(localized: "Szorzás szintjei")
+            : String(localized: "Osztás szintjei")
     }
 
     var body: some View {
@@ -43,9 +45,9 @@ struct LevelSelectView: View {
                 .font(.system(.subheadline, design: .rounded, weight: .medium))
                 .foregroundStyle(.secondary)
             HStack(spacing: 14) {
-                legendDot(color: accent, label: "Most")
-                legendDot(color: AppTheme.mint, label: "Kész")
-                legendDot(color: AppTheme.ink.opacity(0.25), label: "Zárva")
+                legendDot(color: accent, label: String(localized: "Most"))
+                legendDot(color: AppTheme.mint, label: String(localized: "Kész"))
+                legendDot(color: AppTheme.ink.opacity(0.25), label: String(localized: "Zárva"))
             }
             .padding(.top, 4)
         }
@@ -107,7 +109,7 @@ struct LevelSelectView: View {
                 Text(level.title(for: operation))
                     .font(.system(.headline, design: .rounded, weight: .bold))
                     .foregroundStyle(AppTheme.ink)
-                Text(status == .completed ? "Újra játszhatod gyakorláshoz" : masteryCaption(wins: wins))
+                Text(status == .completed ? String(localized: "Újra játszhatod gyakorláshoz") : masteryCaption(wins: wins))
                     .font(.system(.caption, design: .rounded, weight: .medium))
                     .foregroundStyle(.secondary)
             }
@@ -161,18 +163,18 @@ struct LevelSelectView: View {
         }
         .padding(15)
         .background(.white.opacity(0.55), in: RoundedRectangle(cornerRadius: 24, style: .continuous))
-        .accessibilityLabel("\(level.title(for: operation)), zárva")
+        .accessibilityLabel(L10n.levelLockedAccessibility(level.title(for: operation)))
     }
 
     private func masteryCaption(wins: Int) -> String {
         let remaining = max(0, LearningRules.masteryRoundsRequired - wins)
         if wins == 0 {
-            return "2 ügyes kör kell a következő szinthez"
+            return String(localized: "2 ügyes kör kell a következő szinthez")
         }
         if remaining == 0 {
-            return "Szuper! Ez a szint megvan"
+            return String(localized: "Szuper! Ez a szint megvan")
         }
-        return "Még \(remaining) ügyes kör a következő szinthez"
+        return L10n.remainingMasteryRounds(remaining)
     }
 
     private func legendDot(color: Color, label: String) -> some View {

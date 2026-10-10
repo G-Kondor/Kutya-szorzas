@@ -327,6 +327,7 @@
 				DEVELOPMENT_TEAM = 595EKYS652;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Kutyajo matek";
+				INFOPLIST_KEY_CFBundleDevelopmentRegion = hu;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -356,6 +357,7 @@
 				DEVELOPMENT_TEAM = 595EKYS652;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Kutyajo matek";
+				INFOPLIST_KEY_CFBundleDevelopmentRegion = hu;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

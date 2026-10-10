@@ -1,0 +1,1876 @@
+{
+  "sourceLanguage": "hu",
+  "strings": {
+    "Kutyajo matek": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kutyajo matek"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doggy Math"
+          }
+        }
+      }
+    },
+    "Matekozz • Gyűjts • Játssz": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matekozz • Gyűjts • Játssz"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Practice • Collect • Play"
+          }
+        }
+      }
+    },
+    "Ki játszik most?": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ki játszik most?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Who is playing?"
+          }
+        }
+      }
+    },
+    "Válassz profilt, vagy hozz létre egy újat.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Válassz profilt, vagy hozz létre egy újat."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick a profile, or create a new one."
+          }
+        }
+      }
+    },
+    "Új profil": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Új profil"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New profile"
+          }
+        }
+      }
+    },
+    "Szülőknek": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szülőknek"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For parents"
+          }
+        }
+      }
+    },
+    "Hogy hívnak?": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hogy hívnak?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What's your name?"
+          }
+        }
+      }
+    },
+    "Új játékos": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Új játékos"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New player"
+          }
+        }
+      }
+    },
+    "Írd be a keresztneved vagy beceneved, és már játszhatsz is. Nem kell e-mail.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Írd be a keresztneved vagy beceneved, és már játszhatsz is. Nem kell e-mail."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter your first name or nickname and you can start playing. No email needed."
+          }
+        }
+      }
+    },
+    "Adj meg egy nevet. A kutyusok és a haladás külön mentődnek.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adj meg egy nevet. A kutyusok és a haladás külön mentődnek."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter a name. Dogs and progress are saved separately for each profile."
+          }
+        }
+      }
+    },
+    "Pl. Izabella": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pl. Izabella"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "e.g. Izabella"
+          }
+        }
+      }
+    },
+    "Kezdhetjük!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kezdhetjük!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let's go!"
+          }
+        }
+      }
+    },
+    "Profil létrehozása": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil létrehozása"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create profile"
+          }
+        }
+      }
+    },
+    "Mégse": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mégse"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        }
+      }
+    },
+    "Kép választása": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kép választása"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose photo"
+          }
+        }
+      }
+    },
+    "Másik kép": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Másik kép"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose another"
+          }
+        }
+      }
+    },
+    "Kép eltávolítása": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kép eltávolítása"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove photo"
+          }
+        }
+      }
+    },
+    "Profil szerkesztése": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil szerkesztése"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit profile"
+          }
+        }
+      }
+    },
+    "Név": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Név"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name"
+          }
+        }
+      }
+    },
+    "Mentés": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mentés"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save"
+          }
+        }
+      }
+    },
+    "Kép csere": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kép csere"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Change photo"
+          }
+        }
+      }
+    },
+    "Profilváltás": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profilváltás"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Switch profile"
+          }
+        }
+      }
+    },
+    "Visszalép a profilválasztóhoz": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Visszalép a profilválasztóhoz"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goes back to profile selection"
+          }
+        }
+      }
+    },
+    "Szerezd meg az első kutyusod!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szerezd meg az első kutyusod!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get your first puppy!"
+          }
+        }
+      }
+    },
+    "Ügyesen gyűjtöd a kutyusokat!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ügyesen gyűjtöd a kutyusokat!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You're collecting puppies like a star!"
+          }
+        }
+      }
+    },
+    "Oldj meg 5 feladatot hibátlanul egy új barátért.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oldj meg 5 feladatot hibátlanul egy új barátért."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solve 5 questions perfectly to earn a new friend."
+          }
+        }
+      }
+    },
+    "Profil": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profile"
+          }
+        }
+      }
+    },
+    "Váltás": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Váltás"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Switch"
+          }
+        }
+      }
+    },
+    "Szülők": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szülők"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parents"
+          }
+        }
+      }
+    },
+    "Kutyáim": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kutyáim"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My dogs"
+          }
+        }
+      }
+    },
+    "Jó válasz": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jó válasz"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Correct"
+          }
+        }
+      }
+    },
+    "Hibás kör": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hibás kör"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Missed rounds"
+          }
+        }
+      }
+    },
+    "Válassz játékot": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Válassz játékot"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a game"
+          }
+        }
+      }
+    },
+    "Mind a 40": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mind a 40"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All 40"
+          }
+        }
+      }
+    },
+    "A hibátlan kör után itt jelenik meg az első kutyusod.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A hibátlan kör után itt jelenik meg az első kutyusod."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "After a perfect round, your first puppy appears here."
+          }
+        }
+      }
+    },
+    "Szorzás": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szorzás"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Multiplication"
+          }
+        }
+      }
+    },
+    "Osztás": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Osztás"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Division"
+          }
+        }
+      }
+    },
+    "Vegyes": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vegyes"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mixed"
+          }
+        }
+      }
+    },
+    "Szorzótábla 2-től 10-ig, szintről szintre": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szorzótábla 2-től 10-ig, szintről szintre"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Times tables from 2 to 10, level by level"
+          }
+        }
+      }
+    },
+    "Osztás 2-től 10-ig, szintről szintre": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Osztás 2-től 10-ig, szintről szintre"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Division from 2 to 10, level by level"
+          }
+        }
+      }
+    },
+    "Szorzás és osztás felváltva": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szorzás és osztás felváltva"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Multiplication and division mixed"
+          }
+        }
+      }
+    },
+    "Szorzás szintjei": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szorzás szintjei"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Multiplication levels"
+          }
+        }
+      }
+    },
+    "Osztás szintjei": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Osztás szintjei"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Division levels"
+          }
+        }
+      }
+    },
+    "Tanulj lépésről lépésre": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tanulj lépésről lépésre"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Learn step by step"
+          }
+        }
+      }
+    },
+    "Két ügyes kör (legalább 4 jó válasz) nyitja ki a következő szintet. A vegyes játék bármikor elérhető.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Két ügyes kör (legalább 4 jó válasz) nyitja ki a következő szintet. A vegyes játék bármikor elérhető."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two strong rounds (at least 4 correct answers) unlock the next level. Mixed practice is always available."
+          }
+        }
+      }
+    },
+    "Most": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Most"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Now"
+          }
+        }
+      }
+    },
+    "Kész": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kész"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
+          }
+        }
+      }
+    },
+    "Zárva": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zárva"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Locked"
+          }
+        }
+      }
+    },
+    "Újra játszhatod gyakorláshoz": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Újra játszhatod gyakorláshoz"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Replay anytime for practice"
+          }
+        }
+      }
+    },
+    "Még zárva — előbb ügyeskedj az előző szinten": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Még zárva — előbb ügyeskedj az előző szinten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Still locked — master the previous level first"
+          }
+        }
+      }
+    },
+    "2 ügyes kör kell a következő szinthez": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 ügyes kör kell a következő szinthez"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 strong rounds unlock the next level"
+          }
+        }
+      }
+    },
+    "Szuper! Ez a szint megvan": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szuper! Ez a szint megvan"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Great! This level is complete"
+          }
+        }
+      }
+    },
+    "Melyik a jó válasz?": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Melyik a jó válasz?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Which answer is right?"
+          }
+        }
+      }
+    },
+    "Szuper! Ez talált!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szuper! Ez talált!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Super! That's right!"
+          }
+        }
+      }
+    },
+    "Válassz a három lehetőség közül!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Válassz a három lehetőség közül!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick one of the three answers!"
+          }
+        }
+      }
+    },
+    "Még egy kör": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Még egy kör"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Play again"
+          }
+        }
+      }
+    },
+    "Vissza a kezdőlapra": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vissza a kezdőlapra"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back to home"
+          }
+        }
+      }
+    },
+    "Hibátlan kör! Új kutyus érkezett!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hibátlan kör! Új kutyus érkezett!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perfect round! A new puppy arrived!"
+          }
+        }
+      }
+    },
+    "Fantasztikus! Mind a 40 kutyus a tiéd!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fantasztikus! Mind a 40 kutyus a tiéd!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amazing! You have all 40 puppies!"
+          }
+        }
+      }
+    },
+    "Ügyes kör!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ügyes kör!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Great round!"
+          }
+        }
+      }
+    },
+    "Szép próbálkozás!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szép próbálkozás!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nice try!"
+          }
+        }
+      }
+    },
+    "Végigvitted az egész tanulóutat. Büszkék lehettek rád a kutyusok is!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Végigvitted az egész tanulóutat. Büszkék lehettek rád a kutyusok is!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You finished the whole learning path. The puppies are proud of you!"
+          }
+        }
+      }
+    },
+    "Öt jó válasz egymás után — megérdemelted az új barátodat.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öt jó válasz egymás után — megérdemelted az új barátodat."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Five correct answers in a row — you earned a new friend."
+          }
+        }
+      }
+    },
+    "A teljes kutyagyűjteményt megszerezted. Ez óriási teljesítmény!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A teljes kutyagyűjteményt megszerezted. Ez óriási teljesítmény!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You collected every puppy. What an achievement!"
+          }
+        }
+      }
+    },
+    "Ez volt a harmadik elrontott kör, ezért egy kutyus visszakerült a gyűjteménybe. A következő körben újra megszerezheted!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ez volt a harmadik elrontott kör, ezért egy kutyus visszakerült a gyűjteménybe. A következő körben újra megszerezheted!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That was the third missed round, so a puppy went back. You can win it again next round!"
+          }
+        }
+      }
+    },
+    "Legalább 4 jó válasz — így közelebb kerültél a következő szinthez. Hajrá!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Legalább 4 jó válasz — így közelebb kerültél a következő szinthez. Hajrá!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At least 4 correct answers — you're closer to the next level. Keep going!"
+          }
+        }
+      }
+    },
+    "Semmi baj: minden körrel ügyesebb leszel. Három elrontott kör után elveszíthetsz egy kutyust.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semmi baj: minden körrel ügyesebb leszel. Három elrontott kör után elveszíthetsz egy kutyust."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No worries: every round makes you better. After three missed rounds you might lose a puppy."
+          }
+        }
+      }
+    },
+    "szorozva": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "szorozva"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "times"
+          }
+        }
+      }
+    },
+    "osztva": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "osztva"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "divided by"
+          }
+        }
+      }
+    },
+    "Még titkos": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Még titkos"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Still secret"
+          }
+        }
+      }
+    },
+    "Lezárt kutyus": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lezárt kutyus"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Locked puppy"
+          }
+        }
+      }
+    },
+    "Kutyus": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kutyus"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puppy"
+          }
+        }
+      }
+    },
+    "A játék, a profilok és a kutyagyűjtemény teljesen offline működik. Nincs bejelentkezés.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A játék, a profilok és a kutyagyűjtemény teljesen offline működik. Nincs bejelentkezés."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The game, profiles, and dog collection work fully offline. No sign-in."
+          }
+        }
+      }
+    },
+    "Szülői kapu": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szülői kapu"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parent gate"
+          }
+        }
+      }
+    },
+    "Mennyi 7 + 5?": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mennyi 7 + 5?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What is 7 + 5?"
+          }
+        }
+      }
+    },
+    "Válasz": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Válasz"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Answer"
+          }
+        }
+      }
+    },
+    "Ez nem stimmel. Próbáld újra!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ez nem stimmel. Próbáld újra!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That's not right. Try again!"
+          }
+        }
+      }
+    },
+    "Belépés": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belépés"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter"
+          }
+        }
+      }
+    },
+    "Profilkezelés": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profilkezelés"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manage profiles"
+          }
+        }
+      }
+    },
+    "A „Haladás törlése” csak az eredményeket törli. A „Profil törlése” az egész profilt eltávolítja.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A „Haladás törlése” csak az eredményeket törli. A „Profil törlése” az egész profilt eltávolítja."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Reset Progress” only clears results. “Delete Profile” removes the whole profile."
+          }
+        }
+      }
+    },
+    "Nincs még profil. A gyerek a kezdőképernyőn tud újat létrehozni.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nincs még profil. A gyerek a kezdőképernyőn tud újat létrehozni."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No profiles yet. Your child can create one on the home screen."
+          }
+        }
+      }
+    },
+    "Haladás törlése": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haladás törlése"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset Progress"
+          }
+        }
+      }
+    },
+    "Profil törlése": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil törlése"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete Profile"
+          }
+        }
+      }
+    },
+    "Haladás törlése?": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haladás törlése?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset progress?"
+          }
+        }
+      }
+    },
+    "Profil törlése?": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil törlése?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete profile?"
+          }
+        }
+      }
+    },
+    "Hírlevél később": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hírlevél később"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Newsletter later"
+          }
+        }
+      }
+    },
+    "Az e-mailes feliratkozás ehhez a verzióhoz nincs bekötve. A gyerekek adatai, képei és játékhaladása nem kerül semmilyen levelezőlistára.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az e-mailes feliratkozás ehhez a verzióhoz nincs bekötve. A gyerekek adatai, képei és játékhaladása nem kerül semmilyen levelezőlistára."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Email signup is not connected in this version. Children’s names, photos, and gameplay are never added to a mailing list."
+          }
+        }
+      }
+    },
+    "Szia, %@!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szia, %@!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hi, %@!"
+          }
+        }
+      }
+    },
+    "%lld megszerzett kutyus": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld megszerzett kutyus"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld dogs collected"
+          }
+        }
+      }
+    },
+    "%lld / %lld kutyus már a tiéd": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld / %lld kutyus már a tiéd"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld / %lld puppies are yours"
+          }
+        }
+      }
+    },
+    "%lld kutyus · %lld kör": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld kutyus · %lld kör"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld dogs · %lld rounds"
+          }
+        }
+      }
+    },
+    "%@ profilképe": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ profilképe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@’s profile photo"
+          }
+        }
+      }
+    },
+    "Megnyitja %@ játékát": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Megnyitja %@ játékát"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opens %@’s game"
+          }
+        }
+      }
+    },
+    "%@ kutyus": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kutyus"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ the puppy"
+          }
+        }
+      }
+    },
+    "Majdnem! A helyes válasz: %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Majdnem! A helyes válasz: %lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Almost! The correct answer is %lld"
+          }
+        }
+      }
+    },
+    "%lld / %lld helyes válasz": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld / %lld helyes válasz"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld / %lld correct answers"
+          }
+        }
+      }
+    },
+    "Ő %@!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ő %@!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meet %@!"
+          }
+        }
+      }
+    },
+    "Szint nyílt! %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szint nyílt! %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Level unlocked! %@"
+          }
+        }
+      }
+    },
+    "Most %@ elbúcsúzott": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Most %@ elbúcsúzott"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ said goodbye for now"
+          }
+        }
+      }
+    },
+    "Fantasztikus munka! Most már gyakorolhatod: %@.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fantasztikus munka! Most már gyakorolhatod: %@."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fantastic work! You can now practice: %@."
+          }
+        }
+      }
+    },
+    "%@ · Most: %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · Most: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · Now: %@"
+          }
+        }
+      }
+    },
+    "Szorzás %lld-vel": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szorzás %lld-vel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Multiply by %lld"
+          }
+        }
+      }
+    },
+    "Osztás %lld-vel": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Osztás %lld-vel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Divide by %lld"
+          }
+        }
+      }
+    },
+    "Még %lld ügyes kör a következő szinthez": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Még %lld ügyes kör a következő szinthez"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld more strong round(s) to unlock the next level"
+          }
+        }
+      }
+    },
+    "%@, zárva": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, zárva"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, locked"
+          }
+        }
+      }
+    },
+    "%@ haladásának törlése?": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ haladásának törlése?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset %@’s progress?"
+          }
+        }
+      }
+    },
+    "%@ profiljának törlése?": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ profiljának törlése?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete %@’s profile?"
+          }
+        }
+      }
+    },
+    "%@ összes kutyusa, eredménye és szintje törlődik. A név és a profilkép megmarad.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ összes kutyusa, eredménye és szintje törlődik. A név és a profilkép megmarad."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All of %@’s dogs, scores, and levels will be cleared. The name and photo stay."
+          }
+        }
+      }
+    },
+    "%@ profilja, kutyusai, eredményei és a mentett profilkép véglegesen törlődnek. Ez a többi profilt nem érinti.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ profilja, kutyusai, eredményei és a mentett profilkép véglegesen törlődnek. Ez a többi profilt nem érinti."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@’s profile, dogs, scores, and saved photo will be permanently deleted. Other profiles are not affected."
+          }
+        }
+      }
+    },
+    "Minden szint megvan!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minden szint megvan!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every level complete!"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

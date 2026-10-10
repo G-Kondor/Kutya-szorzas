@@ -10,7 +10,7 @@ struct ParentSectionView: View {
     @State private var profilePendingReset: PlayerProfile?
     @State private var profilePendingDelete: PlayerProfile?
 
-    private let gateQuestion = "Mennyi 7 + 5?"
+    private var gateQuestion: String { String(localized: "Mennyi 7 + 5?") }
     private let gateSolution = "12"
 
     var body: some View {
@@ -61,7 +61,7 @@ struct ParentSectionView: View {
             }
         } message: {
             if let profile = profilePendingReset {
-                Text("\(profile.name) összes kutyusa, eredménye és szintje törlődik. A név és a profilkép megmarad.")
+                Text(L10n.resetProgressMessage(profile.name))
             }
         }
         .confirmationDialog(
@@ -86,23 +86,23 @@ struct ParentSectionView: View {
             }
         } message: {
             if let profile = profilePendingDelete {
-                Text("\(profile.name) profilja, kutyusai, eredményei és a mentett profilkép véglegesen törlődnek. Ez a többi profilt nem érinti.")
+                Text(L10n.deleteProfileMessage(profile.name))
             }
         }
     }
 
     private var resetTitle: String {
         if let profile = profilePendingReset {
-            return "\(profile.name) haladásának törlése?"
+            return L10n.resetProgressTitle(profile.name)
         }
-        return "Haladás törlése?"
+        return String(localized: "Haladás törlése?")
     }
 
     private var deleteTitle: String {
         if let profile = profilePendingDelete {
-            return "\(profile.name) profiljának törlése?"
+            return L10n.deleteProfileTitle(profile.name)
         }
-        return "Profil törlése?"
+        return String(localized: "Profil törlése?")
     }
 
     private var gateCard: some View {
@@ -181,7 +181,12 @@ struct ParentSectionView: View {
                     Text(profile.name)
                         .font(.system(.headline, design: .rounded, weight: .bold))
                         .foregroundStyle(AppTheme.ink)
-                    Text("\(store.progress(for: profile).collectedDogIDs.count) kutyus · \(store.progress(for: profile).completedRounds) kör")
+                    Text(
+                        L10n.dogsAndRounds(
+                            dogs: store.progress(for: profile).collectedDogIDs.count,
+                            rounds: store.progress(for: profile).completedRounds
+                        )
+                    )
                         .font(.system(.caption, design: .rounded, weight: .medium))
                         .foregroundStyle(.secondary)
                 }

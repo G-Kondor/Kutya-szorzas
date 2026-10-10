@@ -203,8 +203,8 @@ struct LearningLevel: Identifiable, Hashable, Codable, Sendable {
 
     func title(for operation: MathOperation) -> String {
         switch operation {
-        case .multiplication: "Szorzás \(table)-vel"
-        case .division: "Osztás \(table)-vel"
+        case .multiplication: L10n.multiplicationTableTitle(table)
+        case .division: L10n.divisionTableTitle(table)
         }
     }
 
@@ -252,17 +252,17 @@ enum GameMode: String, CaseIterable, Identifiable, Codable, Sendable {
 
     var title: String {
         switch self {
-        case .multiplication: "Szorzás"
-        case .division: "Osztás"
-        case .mixed: "Vegyes"
+        case .multiplication: String(localized: "Szorzás")
+        case .division: String(localized: "Osztás")
+        case .mixed: String(localized: "Vegyes")
         }
     }
 
     var subtitle: String {
         switch self {
-        case .multiplication: "Szorzótábla 2-től 10-ig, szintről szintre"
-        case .division: "Osztás 2-től 10-ig, szintről szintre"
-        case .mixed: "Szorzás és osztás felváltva"
+        case .multiplication: String(localized: "Szorzótábla 2-től 10-ig, szintről szintre")
+        case .division: String(localized: "Osztás 2-től 10-ig, szintről szintre")
+        case .mixed: String(localized: "Szorzás és osztás felváltva")
         }
     }
 
@@ -507,7 +507,7 @@ enum DogCatalog {
     ]
 
     static func name(for id: Int) -> String {
-        names.indices.contains(id) ? names[id] : "Kutyus"
+        names.indices.contains(id) ? names[id] : String(localized: "Kutyus")
     }
 
     static func imageName(for id: Int) -> String {

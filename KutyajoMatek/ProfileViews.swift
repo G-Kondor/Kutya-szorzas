@@ -28,7 +28,7 @@ struct ProfileAvatarView: View {
             Circle()
                 .stroke(.white.opacity(0.85), lineWidth: 2)
         }
-        .accessibilityLabel("\(profile.name) profilképe")
+        .accessibilityLabel(L10n.profileAvatarAccessibility(profile.name))
     }
 }
 
@@ -51,7 +51,7 @@ struct ProfilePickerView: View {
                         profileRow(profile)
                     }
                     .buttonStyle(.plain)
-                    .accessibilityHint("Megnyitja \(profile.name) játékát")
+                    .accessibilityHint(Text(L10n.opensGameAccessibility(profile.name)))
                 }
 
                 Button {
@@ -117,7 +117,7 @@ struct ProfilePickerView: View {
                     .font(.system(.title2, design: .rounded, weight: .bold))
                     .foregroundStyle(AppTheme.ink)
                 let dogCount = store.progress(for: profile).collectedDogIDs.count
-                Text("\(dogCount) megszerzett kutyus")
+                Text(L10n.dogsCollected(dogCount))
                     .font(.system(.subheadline, design: .rounded, weight: .medium))
                     .foregroundStyle(.secondary)
             }
@@ -153,21 +153,21 @@ struct CreateProfileView: View {
 
             ScrollView {
                 VStack(spacing: 22) {
-                    Text(isFirstLaunch ? "Hogy hívnak?" : "Új játékos")
+                    Text(isFirstLaunch ? String(localized: "Hogy hívnak?") : String(localized: "Új játékos"))
                         .font(.system(size: 30, weight: .heavy, design: .rounded))
                         .foregroundStyle(AppTheme.ink)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
                     Text(isFirstLaunch
-                         ? "Írd be a keresztneved vagy beceneved, és már játszhatsz is. Nem kell e-mail."
-                         : "Adj meg egy nevet. A kutyusok és a haladás külön mentődnek.")
+                         ? String(localized: "Írd be a keresztneved vagy beceneved, és már játszhatsz is. Nem kell e-mail.")
+                         : String(localized: "Adj meg egy nevet. A kutyusok és a haladás külön mentődnek."))
                         .font(.system(.body, design: .rounded, weight: .medium))
                         .foregroundStyle(.secondary)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
                     avatarPicker
 
-                    TextField("Pl. Izabella", text: $name)
+                    TextField(String(localized: "Pl. Izabella"), text: $name)
                         .textInputAutocapitalization(.words)
                         .font(.system(.title3, design: .rounded, weight: .semibold))
                         .padding(16)
@@ -176,7 +176,10 @@ struct CreateProfileView: View {
                     Button {
                         save()
                     } label: {
-                        Label(isFirstLaunch ? "Kezdhetjük!" : "Profil létrehozása", systemImage: "play.fill")
+                        Label(
+                            isFirstLaunch ? String(localized: "Kezdhetjük!") : String(localized: "Profil létrehozása"),
+                            systemImage: "play.fill"
+                        )
                             .font(.system(.headline, design: .rounded, weight: .bold))
                             .frame(maxWidth: .infinity, minHeight: 56)
                             .foregroundStyle(.white)
@@ -224,7 +227,7 @@ struct CreateProfileView: View {
             }
 
             PhotosPicker(selection: $pickerItem, matching: .images) {
-                Text(previewImage == nil ? "Kép választása" : "Másik kép")
+                Text(previewImage == nil ? String(localized: "Kép választása") : String(localized: "Másik kép"))
                     .font(.system(.subheadline, design: .rounded, weight: .bold))
                     .foregroundStyle(AppTheme.lavender)
             }

@@ -31,7 +31,7 @@ struct HomeView: View {
                 .padding(.bottom, 36)
             }
         }
-        .navigationTitle("Szia, \(profile.name)!")
+        .navigationTitle(L10n.hiName(profile.name))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -41,7 +41,7 @@ struct HomeView: View {
                     }
                 }
                 .labelStyle(.iconOnly)
-                .accessibilityHint("Visszalép a profilválasztóhoz")
+                .accessibilityHint(Text("Visszalép a profilválasztóhoz"))
             }
         }
         .sheet(isPresented: $isEditingProfile) {
@@ -194,7 +194,7 @@ struct HomeView: View {
         }
         let path = store.learningPath(for: profile, operation: operation)
         let level = LearningLevel(number: path.unlockedLevel)
-        return "\(mode.subtitle) · Most: \(level.shortLabel(for: operation))"
+        return L10n.modeSubtitleCurrent(mode.subtitle, label: level.shortLabel(for: operation))
     }
 
     private var collectionPreview: some View {

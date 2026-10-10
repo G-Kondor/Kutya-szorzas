@@ -53,7 +53,7 @@ struct DogPortrait: View {
                     .foregroundStyle(AppTheme.pink)
             }
         }
-        .accessibilityLabel("\(DogCatalog.name(for: id)) kutyus")
+        .accessibilityLabel(L10n.dogPortraitAccessibility(DogCatalog.name(for: id)))
     }
 }
 
