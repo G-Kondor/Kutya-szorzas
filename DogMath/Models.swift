@@ -264,6 +264,11 @@ struct LearningRoundOutcome: Equatable, Sendable {
 }
 
 enum QuestionFactory {
+    /// Smallest multiplication/division table used in ordered practice.
+    static let firstTable = 2
+    /// Largest multiplication/division table used in ordered practice.
+    static let lastTable = 10
+
     static func makeRound(mode: GameMode) -> [MathQuestion] {
         makeRound(configuration: PracticeConfiguration(mode: mode, level: nil), difficultyTier: 1)
     }
@@ -271,7 +276,7 @@ enum QuestionFactory {
     static func makeRound(configuration: PracticeConfiguration, difficultyTier: Int) -> [MathQuestion] {
         switch configuration.mode {
         case .mixed:
-            return makeMixedRound()
+            return makeMixedRound(difficultyTier: difficultyTier)
         case .multiplication, .division:
             let operation = configuration.operation ?? .multiplication
             if let level = configuration.level {
@@ -281,9 +286,8 @@ enum QuestionFactory {
                     difficultyTier: difficultyTier
                 )
             }
-            return (0..<LearningRules.questionsPerRound).map { _ in
-                makeQuestion(operation: operation)
-            }
+            // Open practice without a level still walks tables 2 → 3 → 4… instead of random hard pairs.
+            return makeAscendingTablesRound(operation: operation, difficultyTier: difficultyTier)
         }
     }
 
@@ -309,39 +313,84 @@ enum QuestionFactory {
         }
     }
 
-    private static func makeMixedRound() -> [MathQuestion] {
-        (0..<LearningRules.questionsPerRound).map { index in
+    /// Mixed practice: tables rise in order (2, 3, 4…) while alternating × and ÷.
+    private static func makeMixedRound(difficultyTier: Int) -> [MathQuestion] {
+        let tables = ascendingTables(count: LearningRules.questionsPerRound, difficultyTier: difficultyTier)
+        let otherFactors = ascendingOtherFactors(
+            count: LearningRules.questionsPerRound,
+            difficultyTier: difficultyTier
+        )
+
+        return zip(tables, otherFactors).enumerated().map { index, pair in
+            let (table, otherFactor) = pair
             let operation: MathOperation = index.isMultiple(of: 2) ? .multiplication : .division
-            return makeQuestion(operation: operation)
+            return makeTableQuestion(
+                operation: operation,
+                table: table,
+                otherFactor: otherFactor,
+                swapOperands: false
+            )
         }
     }
 
+    /// Single-operation practice that steps through tables 2 → 3 → 4… in order.
+    private static func makeAscendingTablesRound(
+        operation: MathOperation,
+        difficultyTier: Int
+    ) -> [MathQuestion] {
+        let tables = ascendingTables(count: LearningRules.questionsPerRound, difficultyTier: difficultyTier)
+        let otherFactors = ascendingOtherFactors(
+            count: LearningRules.questionsPerRound,
+            difficultyTier: difficultyTier
+        )
+
+        return zip(tables, otherFactors).map { table, otherFactor in
+            makeTableQuestion(
+                operation: operation,
+                table: table,
+                otherFactor: otherFactor,
+                swapOperands: false
+            )
+        }
+    }
+
+    /// One selected table (e.g. ×4): other factors rise in order (1, 2, 3…) so the round stays gentle.
     private static func makeTableRound(
         operation: MathOperation,
         table: Int,
         difficultyTier: Int
     ) -> [MathQuestion] {
-        let cappedTier = min(max(difficultyTier, 1), 3)
-        let poolMax = factorPoolMax(for: cappedTier)
-        var usedFactors = Set<Int>()
-        var questions: [MathQuestion] = []
+        let otherFactors = ascendingOtherFactors(
+            count: LearningRules.questionsPerRound,
+            difficultyTier: difficultyTier
+        )
 
-        for index in 0..<LearningRules.questionsPerRound {
-            let localMax = min(withinRoundMax(for: index), poolMax)
-            let factor = nextFactor(in: 1...localMax, excluding: &usedFactors)
-            let allowSwap = cappedTier >= 2 && operation == .multiplication
-            let swapOperands = allowSwap && Bool.random()
-            questions.append(
-                makeTableQuestion(
-                    operation: operation,
-                    table: table,
-                    otherFactor: factor,
-                    swapOperands: swapOperands
-                )
+        return otherFactors.map { otherFactor in
+            makeTableQuestion(
+                operation: operation,
+                table: table,
+                otherFactor: otherFactor,
+                swapOperands: false
             )
         }
+    }
 
-        return questions
+    /// Tables in teaching order. Easy rounds: 2→6. Harder tiers shift later: 4→8, then 6→10.
+    private static func ascendingTables(count: Int, difficultyTier: Int) -> [Int] {
+        let cappedTier = min(max(difficultyTier, 1), 3)
+        let startTable = min(lastTable, firstTable + (cappedTier - 1) * 2)
+        return (0..<count).map { index in
+            min(startTable + index, lastTable)
+        }
+    }
+
+    /// Partner numbers in teaching order: 1→5 on easy rounds; later tiers shift upward.
+    private static func ascendingOtherFactors(count: Int, difficultyTier: Int) -> [Int] {
+        let cappedTier = min(max(difficultyTier, 1), 3)
+        let start = 1 + (cappedTier - 1) * 2
+        return (0..<count).map { index in
+            min(start + index, 10)
+        }
     }
 
     private static func factorPoolMax(for difficultyTier: Int) -> Int {
@@ -350,21 +399,6 @@ enum QuestionFactory {
         case 2: 8
         default: 10
         }
-    }
-
-    private static func withinRoundMax(for index: Int) -> Int {
-        switch index {
-        case 0, 1: 5
-        case 2, 3: 8
-        default: 10
-        }
-    }
-
-    private static func nextFactor(in range: ClosedRange<Int>, excluding used: inout Set<Int>) -> Int {
-        let available = Array(range).filter { !used.contains($0) }
-        let chosen = available.randomElement() ?? Int.random(in: range)
-        used.insert(chosen)
-        return chosen
     }
 
     private static func makeQuestion(

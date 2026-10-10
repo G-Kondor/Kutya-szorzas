@@ -32,76 +32,86 @@ final class QuestionFactoryTests: XCTestCase {
         }
     }
 
-    func testMixedRoundAlternatesOperations() {
+    func testMixedRoundAlternatesOperationsAndUsesAscendingTables() {
         let questions = QuestionFactory.makeRound(mode: .mixed)
         XCTAssertEqual(questions.map(\.operation), [
             .multiplication, .division, .multiplication, .division, .multiplication
         ])
+
+        // Easy mixed rounds teach tables in order: 2, 3, 4, 5, 6 — not random hard pairs.
+        XCTAssertEqual(questions.map(\.tableFactor), [2, 3, 4, 5, 6])
+        XCTAssertEqual(questions.map(\.otherFactor), [1, 2, 3, 4, 5])
     }
 
-    func testProgressiveMultiplicationUsesSelectedTable() {
+    func testOpenMultiplicationAndDivisionFollowAscendingTableOrder() {
+        let multiplication = QuestionFactory.makeRound(mode: .multiplication)
+        XCTAssertEqual(multiplication.map(\.operation), Array(repeating: .multiplication, count: 5))
+        XCTAssertEqual(multiplication.map(\.tableFactor), [2, 3, 4, 5, 6])
+        XCTAssertEqual(multiplication.map(\.left), [2, 3, 4, 5, 6])
+
+        let division = QuestionFactory.makeRound(mode: .division)
+        XCTAssertEqual(division.map(\.operation), Array(repeating: .division, count: 5))
+        XCTAssertEqual(division.map(\.tableFactor), [2, 3, 4, 5, 6])
+        XCTAssertEqual(division.map(\.right), [2, 3, 4, 5, 6])
+    }
+
+    func testProgressiveMultiplicationUsesSelectedTableInOrder() {
         let level = LearningLevel(number: 3) // ×4
         let configuration = PracticeConfiguration.progressive(operation: .multiplication, level: level)
+        let questions = QuestionFactory.makeRound(configuration: configuration, difficultyTier: 1)
 
-        for tier in 1...3 {
-            for _ in 0..<40 {
-                let questions = QuestionFactory.makeRound(configuration: configuration, difficultyTier: tier)
-                XCTAssertEqual(questions.count, 5)
-
-                for question in questions {
-                    XCTAssertEqual(question.operation, .multiplication)
-                    XCTAssertTrue(
-                        question.left == level.table || question.right == level.table,
-                        "Expected table \(level.table) in \(question.prompt)"
-                    )
-                    XCTAssertEqual(question.left * question.right, question.answer)
-                    XCTAssertLessThanOrEqual(question.answer, 100)
-                }
-            }
+        XCTAssertEqual(questions.map(\.operation), Array(repeating: .multiplication, count: 5))
+        XCTAssertEqual(questions.map(\.left), Array(repeating: level.table, count: 5))
+        XCTAssertEqual(questions.map(\.right), [1, 2, 3, 4, 5])
+        for question in questions {
+            XCTAssertEqual(question.left * question.right, question.answer)
         }
     }
 
-    func testProgressiveDivisionUsesSelectedTableWithWholeAnswers() {
+    func testProgressiveDivisionUsesSelectedTableWithWholeAnswersInOrder() {
         let level = LearningLevel(number: 5) // ÷6
         let configuration = PracticeConfiguration.progressive(operation: .division, level: level)
+        let questions = QuestionFactory.makeRound(configuration: configuration, difficultyTier: 1)
 
-        for tier in 1...3 {
-            for _ in 0..<40 {
-                let questions = QuestionFactory.makeRound(configuration: configuration, difficultyTier: tier)
-                XCTAssertEqual(questions.count, 5)
-
-                for question in questions {
-                    XCTAssertEqual(question.operation, .division)
-                    XCTAssertEqual(question.right, level.table)
-                    XCTAssertEqual(question.left % question.right, 0)
-                    XCTAssertEqual(question.left / question.right, question.answer)
-                    XCTAssertTrue((1...10).contains(question.answer))
-                }
-            }
+        XCTAssertEqual(questions.map(\.right), Array(repeating: level.table, count: 5))
+        XCTAssertEqual(questions.map(\.answer), [1, 2, 3, 4, 5])
+        for question in questions {
+            XCTAssertEqual(question.operation, .division)
+            XCTAssertEqual(question.left % question.right, 0)
+            XCTAssertEqual(question.left / question.right, question.answer)
         }
     }
 
     func testEasyDifficultyKeepsOtherFactorWithinFive() {
         let level = LearningLevel(number: 1)
         let configuration = PracticeConfiguration.progressive(operation: .multiplication, level: level)
+        let questions = QuestionFactory.makeRound(configuration: configuration, difficultyTier: 1)
+        XCTAssertEqual(questions.map(\.otherFactor), [1, 2, 3, 4, 5])
+    }
 
-        for _ in 0..<50 {
-            let questions = QuestionFactory.makeRound(configuration: configuration, difficultyTier: 1)
-            for question in questions {
-                let other = question.left == level.table ? question.right : question.left
-                XCTAssertTrue((1...5).contains(other), "Unexpected factor \(other) at easy tier")
-            }
+    func testHarderTierShiftsOtherFactorsUpwardWithoutRepeats() {
+        let level = LearningLevel(number: 2)
+        let configuration = PracticeConfiguration.progressive(operation: .division, level: level)
+        let questions = QuestionFactory.makeRound(configuration: configuration, difficultyTier: 3)
+        let factors = questions.map(\.answer)
+        XCTAssertEqual(factors, [5, 6, 7, 8, 9])
+        XCTAssertEqual(Set(factors).count, factors.count)
+    }
+}
+
+private extension MathQuestion {
+    /// The teaching-table factor (2...10) for ordered practice questions.
+    var tableFactor: Int {
+        switch operation {
+        case .multiplication: left
+        case .division: right
         }
     }
 
-    func testRoundAvoidsRepeatingTheSameOtherFactorWhenPossible() {
-        let level = LearningLevel(number: 2)
-        let configuration = PracticeConfiguration.progressive(operation: .division, level: level)
-
-        for _ in 0..<30 {
-            let questions = QuestionFactory.makeRound(configuration: configuration, difficultyTier: 3)
-            let factors = questions.map(\.answer)
-            XCTAssertEqual(Set(factors).count, factors.count)
+    var otherFactor: Int {
+        switch operation {
+        case .multiplication: right
+        case .division: answer
         }
     }
 }
