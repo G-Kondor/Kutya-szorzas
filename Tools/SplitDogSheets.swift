@@ -4,7 +4,7 @@ import Foundation
 let fileManager = FileManager.default
 let root = URL(fileURLWithPath: fileManager.currentDirectoryPath)
 let sheetsDirectory = root.appendingPathComponent("ArtworkSource/DogSheets")
-let outputDirectory = root.appendingPathComponent("DogMath/Resources/Dogs")
+let outputDirectory = root.appendingPathComponent("KutyajoMatek/Resources/Dogs")
 
 try fileManager.createDirectory(at: outputDirectory, withIntermediateDirectories: true)
 

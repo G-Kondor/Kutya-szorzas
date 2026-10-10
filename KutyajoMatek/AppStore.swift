@@ -6,7 +6,8 @@ final class AppStore: ObservableObject {
     @Published private(set) var progressByProfile: [String: PlayerProgress]
 
     private let defaults: UserDefaults
-    private let storageKey = "dogMath.progress.v1"
+    private let storageKey = "kutyajoMatek.progress.v1"
+    private let legacyStorageKey = "dogMath.progress.v1"
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
@@ -15,6 +16,12 @@ final class AppStore: ObservableObject {
             let saved = try? JSONDecoder().decode([String: PlayerProgress].self, from: data)
         {
             progressByProfile = saved
+        } else if
+            let legacyData = defaults.data(forKey: legacyStorageKey),
+            let saved = try? JSONDecoder().decode([String: PlayerProgress].self, from: legacyData)
+        {
+            progressByProfile = saved
+            defaults.set(legacyData, forKey: storageKey)
         } else {
             progressByProfile = [:]
         }
