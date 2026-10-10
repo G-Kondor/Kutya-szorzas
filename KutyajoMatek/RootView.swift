@@ -49,7 +49,7 @@ private struct SplashView: View {
                     .scaleEffect(isPulsing ? 1.06 : 0.94)
             }
 
-            Text("Kutyaszorzás")
+            Text("Kutyajo matek")
                 .font(.system(size: 38, weight: .heavy, design: .rounded))
                 .foregroundStyle(AppTheme.ink)
 

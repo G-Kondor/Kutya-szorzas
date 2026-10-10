@@ -1,5 +1,5 @@
 import XCTest
-@testable import Kutyaszorzas
+@testable import KutyajoMatek
 
 final class QuestionFactoryTests: XCTestCase {
     func testAllFortyDogPortraitsAreBundled() {
@@ -282,7 +282,7 @@ final class AppStoreTests: XCTestCase {
         )
         defaults.set(
             try JSONEncoder().encode([profile.id: forced]),
-            forKey: "dogMath.progress.v1"
+            forKey: "kutyajoMatek.progress.v1"
         )
 
         let store = AppStore(defaults: defaults)

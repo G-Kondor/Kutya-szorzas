@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "700000000000000000000001"
-               BuildableName = "Kutyaszorzas.app"
-               BlueprintName = "Kutyaszorzas"
-               ReferencedContainer = "container:DogMath.xcodeproj">
+               BuildableName = "KutyajoMatek.app"
+               BlueprintName = "KutyajoMatek"
+               ReferencedContainer = "container:KutyajoMatek.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,9 +34,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "800000000000000000000001"
-               BuildableName = "KutyaszorzasTests.xctest"
-               BlueprintName = "KutyaszorzasTests"
-               ReferencedContainer = "container:DogMath.xcodeproj">
+               BuildableName = "KutyajoMatekTests.xctest"
+               BlueprintName = "KutyajoMatekTests"
+               ReferencedContainer = "container:KutyajoMatek.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "700000000000000000000001"
-            BuildableName = "Kutyaszorzas.app"
-            BlueprintName = "Kutyaszorzas"
-            ReferencedContainer = "container:DogMath.xcodeproj">
+            BuildableName = "KutyajoMatek.app"
+            BlueprintName = "KutyajoMatek"
+            ReferencedContainer = "container:KutyajoMatek.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "700000000000000000000001"
-            BuildableName = "Kutyaszorzas.app"
-            BlueprintName = "Kutyaszorzas"
-            ReferencedContainer = "container:DogMath.xcodeproj">
+            BuildableName = "KutyajoMatek.app"
+            BlueprintName = "KutyajoMatek"
+            ReferencedContainer = "container:KutyajoMatek.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
