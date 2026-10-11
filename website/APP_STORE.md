@@ -3,13 +3,13 @@
 Fejlesztő: **Gergő Kondor**  
 Támogatási e-mail: **kondorgergo@gmail.com**
 
-A végleges, nyilvánosan elérhető HTTPS-domainhez az alábbi útvonalakat használd. A Vercel projekt tartós production domainjét válaszd, ne egy ideiglenes vagy bejelentkezést kérő előnézeti címet.
+A kész, nyilvános oldal: https://kutyajo-matek.vercel.app. Az alábbi tartós production URL-eket használhatod az App Store Connectben.
 
 | App Store mező | Weboldal / érték |
 | --- | --- |
-| Marketing URL | A weboldal kezdőlapja: `/` |
-| Privacy Policy URL | `/privacy` |
-| Hungarian – Support URL | `/support` |
+| Marketing URL | `https://kutyajo-matek.vercel.app/` |
+| Privacy Policy URL | `https://kutyajo-matek.vercel.app/privacy` |
+| Hungarian – Support URL | `https://kutyajo-matek.vercel.app/support` |
 | Copyright | `2026 Gergő Kondor` (ha te vagy a jogosult) |
 
 ## A weboldalhoz kapcsolódó mezők

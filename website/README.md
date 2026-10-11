@@ -2,6 +2,8 @@
 
 Magyar nyelvű, mobilbarát statikus oldal, az app saját grafikáival. Külön támogatási, adatvédelmi és jogi oldalak; regisztráció és analitika nélkül. A tájékoztató a `00c220c` app-verzió forráskódjának működése alapján készült.
 
+Élő oldal: **https://kutyajo-matek.vercel.app**
+
 ## Helyi indítás
 
 Node.js 20 vagy újabb szükséges, külső csomagtelepítés nem kell.
