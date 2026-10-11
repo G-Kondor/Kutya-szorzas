@@ -34,3 +34,7 @@ git push
 ## Grafika
 
 A 40 kutyaportré és az appikon az OpenAI beépített képgenerálójával készült ehhez a projekthez. A forráslapok az `ArtworkSource/DogSheets` mappában, az alkalmazás által használt képek a `KutyajoMatek/Resources/Dogs` mappában találhatók.
+
+## Bemutatkozó weboldal
+
+A Vercelre telepíthető magyar promóciós, támogatási és adatvédelmi oldalak a [`website/`](website/README.md) mappában találhatók. Az App Store Connect mezőihez a [`website/APP_STORE.md`](website/APP_STORE.md) ad útmutatót.

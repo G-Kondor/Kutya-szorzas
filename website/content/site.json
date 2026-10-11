@@ -1,0 +1,33 @@
+{
+  "appName": "Kutyajó Matek",
+  "developer": "Gergő Kondor",
+  "supportEmail": "kondorgergo@gmail.com",
+  "updatedAt": "2026-10-11",
+  "appStoreUrl": null,
+  "supportFaq": [
+    {
+      "question": "Kell hozzá internet vagy regisztráció?",
+      "answer": "Nem. A játék internetkapcsolat és online fiók nélkül használható. Az első induláskor hozz létre egy helyi profilt: egy becenév is elég, a profilkép választható."
+    },
+    {
+      "question": "Hogyan lehet új kutyust szerezni?",
+      "answer": "Egy kör öt feladatból áll. Öt helyes válasz után új kutyus csatlakozik a gyűjteményhez, amíg meg nem szerezted mind a negyvenet. A harmadik elrontott kör után egy megszerzett kutyus elveszik; később újra megszerezhető."
+    },
+    {
+      "question": "Hogyan nyílik meg a következő szint?",
+      "answer": "A szorzás és az osztás külön tanulási útvonalat kapott a 2–10-es szorzótáblához. Egy szinten két olyan kör szükséges a továbblépéshez, amelyben legalább négy válasz helyes."
+    },
+    {
+      "question": "Hol tudom törölni a profilt vagy az eredményeket?",
+      "answer": "Nyisd meg a Szülőknek részt, és válaszold meg a szülői kapu kérdését. A Haladás törlése az eredményeket, a szinteket és a kutyusokat törli, de a nevet és a képet megtartja. A Profil törlése a teljes helyi profilt, a mentett képet és minden hozzá tartozó haladást eltávolítja."
+    },
+    {
+      "question": "Átvihető a haladás egy másik eszközre?",
+      "answer": "Az appban nincs saját felhőszinkron vagy online helyreállítás. A profilok az adott eszközön vannak. Az Apple eszközmentéseinek működése az iOS-beállításoktól függ; az alkalmazás törlése vagy eszközcsere előtt ezt külön ellenőrizd."
+    },
+    {
+      "question": "Milyen eszközön és nyelven használható?",
+      "answer": "Az alkalmazás iOS 17 vagy újabb rendszert igényel. Magyarul és angolul használható; a nyelvválasztóban a rendszer nyelve is követhető."
+    }
+  ]
+}
