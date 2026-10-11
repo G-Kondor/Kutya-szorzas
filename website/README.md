@@ -35,7 +35,7 @@ A `vercel.json` tartalmazza a beállításokat, a biztonsági fejléceket és a 
 
 ## Tartalom szerkesztése
 
-- `content/site.json`: fejlesztő neve, e-mail, frissítés dátuma, App Store-link, támogatási kérdések.
+- `content/site.json`: fejlesztő neve, e-mail, frissítés dátuma, App Store-link, támogatási kérdések és képernyőképek feliratai.
 - `content/privacy.html`: adatvédelmi tájékoztató. A `{{developer}}` és `{{supportEmail}}` helyére automatikusan a beállított adatok kerülnek.
 - `build.mjs`: bemutatkozó és jogi oldal szövege, oldalszerkezet.
 - `styles.css`: megjelenés.
@@ -49,3 +49,7 @@ Ha megvan az App Store termékoldala, a `content/site.json` `appStoreUrl` mezőj
 A mezők kitöltéséhez lásd az [APP_STORE.md](APP_STORE.md) útmutatót. Az útmutató nem része a nyilvános weboldalnak.
 
 Az adatvédelmi szöveg 12 hónapos, ügy lezárása utáni megőrzést ír elő a támogatási levelekre. Ezt a levelezés kezelésében is tartsd be, vagy a tényleges gyakorlatodhoz igazítsd a szöveget. Ha az app később online fiókot, analitikát, reklámot vagy felhőt kap, a tájékoztatót és az App Store adatvédelmi válaszait is frissíteni kell.
+
+## Képernyőképek
+
+A főoldali galéria az `AppStoreAssets/Screenshots/iPhone-6.3` mappából származó három eredeti App Store-képet használja. A weboldal önálló példányai az `assets/screenshots/` mappában vannak, így a Vercel buildje nem függ külső helyi fájloktól. A képek kattintással teljes méretben megnyithatók; a feliratok és a sorrend a `content/site.json` `screenshots` listájában szerkeszthetők.

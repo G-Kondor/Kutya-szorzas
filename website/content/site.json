@@ -29,5 +29,25 @@
       "question": "Milyen eszközön és nyelven használható?",
       "answer": "Az alkalmazás iOS 17 vagy újabb rendszert igényel. Magyarul és angolul használható; a nyelvválasztóban a rendszer nyelve is követhető."
     }
+  ],
+  "screenshots": [
+    {
+      "file": "01-szorzotabla-jatszva.png",
+      "title": "Szorzótábla játszva",
+      "alt": "A Kutyajó Matek gyakorlóképernyője: a 6 × 3 feladathoz három válasz választható.",
+      "description": "Rövid feladatok, átlátható válaszok, szintről szintre."
+    },
+    {
+      "file": "02-hibatlan-kor-uj-kutyus.png",
+      "title": "Egy új kutyabarát",
+      "alt": "A hibátlan kör jutalomképernyője: Tulipán kutyus, öt helyes válasz és az új hetes szorzási szint.",
+      "description": "Öt jó válasz után új kedvenc csatlakozik a gyűjteményhez."
+    },
+    {
+      "file": "03-gyujtsd-ossze-mind-a-40-et.png",
+      "title": "Saját kutyusgyűjtemény",
+      "alt": "A Kutyáim képernyő a megszerzett kutyusokkal, köztük Masni, Zsömle, Pötty és Málna portréjával.",
+      "description": "Negyven különböző kutyus várja, hogy megismerd."
+    }
   ]
 }
